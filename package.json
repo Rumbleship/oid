@@ -5,7 +5,7 @@
     "Isaac Sparling <isaac@rumbleship.com"
   ],
   "main": "lib/src/index.js",
-  "description": "Template for new TypeScript libraries at Rumbleship",
+  "description": "Global registry of Rumbleship OIDs",
   "license": "UNLICENSED",
   "private": true,
   "engines": {
@@ -20,9 +20,11 @@
   "devDependencies": {
     "@types/jest": "^24.0.6",
     "@types/node": "^12.0.4",
+    "@types/hashids": "^1.0.30",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^24.1.0",
     "coveralls": "^3.0.3",
+    "hashids": "^1.2.2",
     "jest": "^24.0.0",
     "prettier": "^1.14.3",
     "prettier-tslint": "^0.4.0",
@@ -34,10 +36,14 @@
     "tslint-config-prettier": "^1.14.0",
     "tslint-no-focused-test": "^0.5.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "xxhash": "^0.2.4"
   },
   "peerDependencies": {
-    "reflect-metadata": "^0.1.13"
+    "@types/hashids": "^1.0.30",
+    "hashids": "^1.2.2",
+    "reflect-metadata": "^0.1.13",
+    "xxhash": "^0.2.4"
   },
   "jest": {
     "testEnvironment": "node"
