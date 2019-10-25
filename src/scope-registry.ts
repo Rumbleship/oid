@@ -43,6 +43,13 @@ export class ScopeRegistry {
   }
 
   register(scopename: string, shortcode?: string): string | number {
+    const registeredKey = ScopeRegistry.registeredByScopename.get(scopename);
+
+    if (registeredKey && shortcode && registeredKey !== shortcode) {
+      throw new Error(
+        `Cannot reregister Scope:${scopename} has already been registered under shortcode:${shortcode}`
+      );
+    }
     switch (ScopeRegistry.getScopeType(scopename)) {
       case ScopeTypes.EXPERIMENTAL:
       case ScopeTypes.OID:

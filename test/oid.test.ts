@@ -28,13 +28,18 @@ describe('Scenario: Experimental Oids can be registered', () => {
           expect(id).toBe(database_id);
         });
       });
-      describe('When: registering the same scope', () => {
+      describe('When: registering the same scope, same shortcode', () => {
         let key2: string | number;
         beforeAll(() => {
           key2 = Oid2.RegisterScope(ExperimentalScope, experimentalShortcode);
         });
         test('Then: the specified shortcode should be returned as a key', () => {
           expect(key2).toBe(experimentalShortcode);
+        });
+      });
+      describe('When: registering the same scope, NEW shortcode', () => {
+        test('Then: an error is thrown', () => {
+          expect(() => Oid2.RegisterScope(ExperimentalScope, 'newshortcode')).toThrow();
         });
       });
     });
