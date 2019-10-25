@@ -1,6 +1,6 @@
+import { Oid2 } from '../oid';
 import { ScopeRegistry } from '../scope-registry';
 import { OidFactory } from './factory.interface';
-import { Oid2 } from 'src/oid';
 
 function toBase64(source: string | number): string {
   return Buffer.from('' + source).toString('base64');

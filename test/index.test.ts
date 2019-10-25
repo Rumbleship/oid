@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Oid2, ScopeTypes } from '../src';
 
-describe('Scenario: Oids can be registered', () => {
+describe('Scenario: Experimental Oids can be registered', () => {
   describe('Given: an empty scope registry', () => {
     beforeAll(() => {
       Oid2.unregisterScopes();
@@ -82,7 +82,7 @@ describe('Scenario: Oids can be registered', () => {
   });
 });
 
-describe('Scenario: ceating Hashid Oids', () => {
+describe('Scenario: creating Hashid Oids', () => {
   describe('Given: a PurchaseOrder scope has been registered', () => {
     beforeAll(() => {
       Oid2.RegisterScope('PurchaseOrder', 'po');
