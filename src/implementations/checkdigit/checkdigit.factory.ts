@@ -1,7 +1,7 @@
 import Hashids from 'hashids';
 
 import { OidFactory } from '../oid-factory.interface';
-import { AlphaScopeNames } from './alpha.scopes.';
+import { AlphaScopeNames } from './alpha.scopes';
 import { ScopeRegistry } from '../scope-registry';
 import { Oid2 } from '../../oid';
 
