@@ -1,42 +1,48 @@
 import Hashids from 'hashids';
 
 import { OidFactory } from '../oid-factory.interface';
-import { HashidScopeNames } from './hashids';
+import { AlphaScopeNames } from './alpha.scopes.';
 import { ScopeRegistry } from '../scope-registry';
 import { Oid2 } from '../../oid';
 
-export class HashidOidFactory implements OidFactory {
+export class CheckdigitOidFactory implements OidFactory {
   static GetHashidOidOptions(scopename: string) {
-    switch (scopename as HashidScopeNames) {
-      case HashidScopeNames.Buyer:
+    switch (scopename) {
+      case AlphaScopeNames.Buyer:
         return {
           shortcode: 'b',
           checksum: 2,
           salt: 'Division'
         };
-      case HashidScopeNames.Supplier:
+      case AlphaScopeNames.Supplier:
         return {
           shortcode: 's',
           checksum: 2,
           salt: 'Division'
         };
-      case HashidScopeNames.User:
+      case AlphaScopeNames.User:
         return {
           shortcode: 'u',
           checksum: 2,
           salt: 'User'
         };
-      case HashidScopeNames.PurchaseOrder:
+      case AlphaScopeNames.PurchaseOrder:
         return {
           shortcode: 'po',
           checksum: 3,
           salt: 'purchaseOrder'
         };
-      case HashidScopeNames.Shipment:
+      case AlphaScopeNames.Shipment:
         return {
           shortcode: 'shp',
           checksum: 5,
           salt: 'shipment'
+        };
+      default:
+        return {
+          shortcode: null, // TODO FIX THIS??
+          checksum: 6,
+          salt: 'rfi_oid'
         };
     }
   }
@@ -57,7 +63,7 @@ export class HashidOidFactory implements OidFactory {
     if (typeof id !== 'number') {
       throw new Error('A Hashid Oid must be created with a db_id type:number');
     }
-    const { checksum } = HashidOidFactory.GetHashidOidOptions(scopename);
+    const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
     const shortcode = ScopeRegistry.getKey(scopename);
     const encoded = this.getEncoder(scopename).encode(id);
     const check_digit = this.checksumDigit(encoded, checksum);
@@ -65,7 +71,7 @@ export class HashidOidFactory implements OidFactory {
   }
 
   verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string {
-    const { checksum } = HashidOidFactory.GetHashidOidOptions(scope);
+    const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scope);
     const hashLength = suffix.length - 1;
     const checksumDigit = suffix.substring(hashLength, hashLength + 1);
     const hash = suffix.substring(0, hashLength);
@@ -87,8 +93,12 @@ export class HashidOidFactory implements OidFactory {
   }
 
   getEncoder(scopename: string) {
-    const { salt } = HashidOidFactory.GetHashidOidOptions(scopename);
-    // HashidOids are minLength 4 because they include a checkdigit
-    return new Hashids(salt, 4, ScopeRegistry.ALPHABET);
+    const { salt } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
+    // if the scopename is in the alpha scopes, length must be 4 for backward compatibility; else 5
+    return new Hashids(
+      salt,
+      Reflect.get(AlphaScopeNames, scopename) ? 4 : 5,
+      ScopeRegistry.ALPHABET
+    );
   }
 }

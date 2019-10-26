@@ -1,2 +1,2 @@
-export * from './hashid.factory';
-export * from './hashids';
+export * from './checkdigit.factory';
+export * from './alpha.scopes.';

@@ -1,2 +1,2 @@
-export * from './modern.factory';
-export * from './modern';
+export * from './plain.factory';
+export * from './plain';

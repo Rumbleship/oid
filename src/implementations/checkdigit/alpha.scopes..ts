@@ -1,4 +1,4 @@
-export enum HashidScopeNames {
+export enum AlphaScopeNames {
   Buyer = 'Buyer',
   Supplier = 'Supplier',
   PurchaseOrder = 'PurchaseOrder',

@@ -1,4 +1,4 @@
-export enum OidScopeNames {
+export enum PlainScopeNames {
   Activity = 'Activity',
   BusinessApplication = 'BusinessApplication',
   Company = 'Company',

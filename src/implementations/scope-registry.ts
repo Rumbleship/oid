@@ -1,7 +1,7 @@
 import * as xxhash from 'xxhash';
-import { OidScopeNames } from './plain';
+import { PlainScopeNames } from './plain';
 import { ScopeTypes } from './types';
-import { HashidScopeNames } from './checkdigit';
+import { AlphaScopeNames } from './checkdigit';
 import { TildeScopeNames } from './tilde';
 
 export class ScopeRegistry {
@@ -14,11 +14,11 @@ export class ScopeRegistry {
   >();
 
   static getScopeType(scopename: string): ScopeTypes {
-    if (Reflect.get(OidScopeNames, scopename)) {
+    if (Reflect.get(PlainScopeNames, scopename)) {
       return ScopeTypes.OID;
     }
 
-    if (Reflect.get(HashidScopeNames, scopename)) {
+    if (Reflect.get(AlphaScopeNames, scopename)) {
       return ScopeTypes.HASHID;
     }
 

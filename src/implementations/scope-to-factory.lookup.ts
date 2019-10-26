@@ -1,9 +1,9 @@
-import { HashidOidFactory, HashidScopeNames } from './checkdigit';
+import { CheckdigitOidFactory, AlphaScopeNames } from './checkdigit';
 import { TildeOidFactory, TildeScopeNames } from './tilde';
-import { ModernOidFactory, OidScopeNames } from './plain';
+import { ModernOidFactory, PlainScopeNames } from './plain';
 import { OidFactory } from './oid-factory.interface';
 
-const hashidFactory = new HashidOidFactory();
+const hashidFactory = new CheckdigitOidFactory();
 const tildeFactory = new TildeOidFactory();
 const modernOidFactory = new ModernOidFactory();
 export const OidFactoryMapByScope: Map<string, OidFactory> = new Map<string, OidFactory>();
@@ -11,9 +11,9 @@ export const OidFactoryMapByScope: Map<string, OidFactory> = new Map<string, Oid
 for (const scopeName of Object.keys(TildeScopeNames)) {
   OidFactoryMapByScope.set(scopeName, tildeFactory);
 }
-for (const scopeName of Object.keys(HashidScopeNames)) {
+for (const scopeName of Object.keys(AlphaScopeNames)) {
   OidFactoryMapByScope.set(scopeName, hashidFactory);
 }
-for (const scopeName of Object.keys(OidScopeNames)) {
+for (const scopeName of Object.keys(PlainScopeNames)) {
   OidFactoryMapByScope.set(scopeName, modernOidFactory);
 }
