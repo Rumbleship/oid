@@ -1,4 +1,4 @@
-import { OidFactory } from './factories';
+import { OidFactory } from './implementations/oid-factory.interface';
 export declare class Oid2 {
     oid: string;
     private static readonly registry;

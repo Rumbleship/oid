@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import { Oid2, ScopeTypes } from '../src';
+import { ScopeTypes } from '../src/implementations/types';
+import { Oid2 } from '../src';
 
 describe('Scenario: Experimental Oids can be registered', () => {
   describe('Given: an empty scope registry', () => {

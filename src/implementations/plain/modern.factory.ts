@@ -1,7 +1,7 @@
 import Hashids from 'hashids';
 import { ScopeRegistry } from '../scope-registry';
-import { Oid2 } from '../oid';
-import { OidFactory } from './factory.interface';
+import { Oid2 } from '../../oid';
+import { OidFactory } from '../oid-factory.interface';
 
 export class ModernOidFactory implements OidFactory {
   create(scopename: string, id: string | number) {

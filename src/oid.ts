@@ -1,6 +1,8 @@
-import { scopeRegistry, ScopeRegistry } from './scope-registry';
-import { OidFactory, ModernOidFactory, TildeOidFactory } from './factories';
-import { OidFactoryMapByScope } from './lookup/scope-to-factory.lookup';
+import { scopeRegistry, ScopeRegistry } from './implementations/scope-registry';
+import { OidFactoryMapByScope } from './implementations/scope-to-factory.lookup';
+import { OidFactory } from './implementations/oid-factory.interface';
+import { ModernOidFactory } from './implementations/plain';
+import { TildeOidFactory } from './implementations/tilde';
 
 function fromBase64(source: string): string {
   return Buffer.from(source, 'base64').toString('ascii');

@@ -1,5 +1,7 @@
-import { HashidOidFactory, TildeOidFactory, ModernOidFactory, OidFactory } from '../factories';
-import { HashidScopeNames, TildeScopeNames, OidScopeNames } from '../scopes';
+import { HashidOidFactory, HashidScopeNames } from './checkdigit';
+import { TildeOidFactory, TildeScopeNames } from './tilde';
+import { ModernOidFactory, OidScopeNames } from './plain';
+import { OidFactory } from './oid-factory.interface';
 
 const hashidFactory = new HashidOidFactory();
 const tildeFactory = new TildeOidFactory();

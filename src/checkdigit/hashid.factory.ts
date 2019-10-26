@@ -1,8 +1,8 @@
 import Hashids from 'hashids';
-import { Oid2 } from '..//oid';
-import { HashidScopeNames } from '../scopes';
-import { ScopeRegistry } from '../scope-registry';
-import { OidFactory } from './factory.interface';
+import { Oid2 } from '../oid';
+import { ScopeRegistry } from '../implementations/scope-registry';
+import { HashidScopeNames } from '../implementations/checkdigit';
+import { OidFactory } from '../implementations/oid-factory.interface';
 
 export class HashidOidFactory implements OidFactory {
   static GetHashidOidOptions(scopename: string) {

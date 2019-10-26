@@ -1,5 +1,8 @@
 import * as xxhash from 'xxhash';
-import { ScopeTypes, OidScopeNames, HashidScopeNames, TildeScopeNames } from './scopes';
+import { OidScopeNames } from './plain';
+import { ScopeTypes } from './types';
+import { HashidScopeNames } from './checkdigit';
+import { TildeScopeNames } from './tilde';
 
 export class ScopeRegistry {
   static ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
