@@ -1,7 +1,7 @@
 import { scopeRegistry, ScopeRegistry } from './implementations/scope-registry';
 import { OidFactoryMapByScope } from './implementations/scope-to-factory.lookup';
 import { OidFactory } from './implementations/oid-factory.interface';
-import { ModernOidFactory } from './implementations/plain';
+import { PlainOidFactory } from './implementations/plain';
 import { TildeOidFactory } from './implementations/tilde';
 
 function fromBase64(source: string): string {
@@ -15,10 +15,10 @@ export class Oid2 {
     return Oid2.registry.register(scope, shortcode);
   }
   static getFactoryByScopename(scopename: string): OidFactory {
-    const factory = OidFactoryMapByScope.get(scopename) || new ModernOidFactory();
+    const factory = OidFactoryMapByScope.get(scopename) || new PlainOidFactory();
     if (!factory) {
       throw new Error(
-        'Scope has no corresponding factory. Do you want to create a HashidOid, TildeOid, or ModernOid? (You want the last one).'
+        'Scope has no corresponding factory.
       );
     }
     return factory;

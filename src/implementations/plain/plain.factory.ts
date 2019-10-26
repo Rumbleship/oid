@@ -3,10 +3,10 @@ import { ScopeRegistry } from '../scope-registry';
 import { Oid2 } from '../../oid';
 import { OidFactory } from '../oid-factory.interface';
 
-export class ModernOidFactory implements OidFactory {
+export class PlainOidFactory implements OidFactory {
   create(scopename: string, id: string | number) {
     if (typeof id !== 'number') {
-      throw new Error('A ModernOid must be created with a db_id type:number');
+      throw new Error('A PlainOid must be created with a db_id type:number');
     }
     const shortcode = ScopeRegistry.getKey(scopename);
     const encoded = this.getEncoder(scopename).encode(id);

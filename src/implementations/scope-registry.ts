@@ -57,7 +57,7 @@ export class ScopeRegistry {
       case ScopeTypes.EXPERIMENTAL:
       case ScopeTypes.OID:
         if (!shortcode) {
-          throw new Error('ModernOid scopes must declare their shortcode');
+          throw new Error('PlainOid scopes must declare their shortcode');
         }
         ScopeRegistry.registeredByScopename.set(scopename, shortcode);
         ScopeRegistry.registeredByKey.set(shortcode, scopename);
