@@ -11,6 +11,16 @@ function fromBase64(source: string): string {
 export class Oid2 {
   private static readonly registry = scopeRegistry;
 
+  // Overide Object.valueOf so that the GraphQL ID type can convert to the 'primitive' type. In this case a
+  // string.
+  valueOf() {
+    return this.oid;
+  }
+
+  toString() {
+    return this.oid;
+  }
+
   static RegisterScope(scope: string, shortcode?: string) {
     return Oid2.registry.register(scope, shortcode);
   }

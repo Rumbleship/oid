@@ -10,6 +10,9 @@ function fromBase64(source: string): string {
   return Buffer.from(source, 'base64').toString('ascii');
 }
 
+/**
+ * Specific for Banking for historic reasons
+ */
 export class TildeOidFactory implements OidFactory {
   create(scopename: string, id: string | number) {
     const key = ScopeRegistry.getKey(scopename);
