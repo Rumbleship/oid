@@ -10,37 +10,38 @@ export class CheckdigitOidFactory implements OidFactory {
     switch (scopename) {
       case AlphaScopeNames.Buyer:
         return {
-          shortcode: 'b',
+          length: 4,
           checksum: 2,
           salt: 'Division'
         };
       case AlphaScopeNames.Supplier:
         return {
-          shortcode: 's',
+          length: 4,
           checksum: 2,
           salt: 'Division'
         };
       case AlphaScopeNames.User:
         return {
-          shortcode: 'u',
+          length: 4,
           checksum: 2,
           salt: 'User'
         };
       case AlphaScopeNames.PurchaseOrder:
         return {
-          shortcode: 'po',
+          length: 4,
           checksum: 3,
           salt: 'purchaseOrder'
         };
       case AlphaScopeNames.Shipment:
         return {
-          shortcode: 'shp',
+          length: 4,
           checksum: 5,
           salt: 'shipment'
         };
       default:
         return {
           shortcode: null, // TODO FIX THIS??
+          length: 6,
           checksum: 6,
           salt: 'rfi_oid'
         };
@@ -93,12 +94,8 @@ export class CheckdigitOidFactory implements OidFactory {
   }
 
   getEncoder(scopename: string) {
-    const { salt } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
+    const { salt, length } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
     // if the scopename is in the alpha scopes, length must be 4 for backward compatibility; else 5
-    return new Hashids(
-      salt,
-      Reflect.get(AlphaScopeNames, scopename) ? 4 : 5,
-      ScopeRegistry.ALPHABET
-    );
+    return new Hashids(salt, length, ScopeRegistry.ALPHABET);
   }
 }

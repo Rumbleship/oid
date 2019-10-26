@@ -17,9 +17,7 @@ export class Oid2 {
   static getFactoryByScopename(scopename: string): OidFactory {
     const factory = OidFactoryMapByScope.get(scopename) || new PlainOidFactory();
     if (!factory) {
-      throw new Error(
-        'Scope has no corresponding factory.
-      );
+      throw new Error('Scope has no corresponding factory.');
     }
     return factory;
   }
