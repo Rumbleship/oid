@@ -1,3 +1,4 @@
+import { ArbiterScopeNames } from './arbiter.scopes';
 import Hashids from 'hashids';
 
 import { OidFactory } from '../oid-factory.interface';
@@ -8,6 +9,15 @@ import { Oid2 } from '../../oid';
 export class CheckdigitOidFactory implements OidFactory {
   static GetHashidOidOptions(scopename: string) {
     switch (scopename) {
+      case ArbiterScopeNames.Workflow:
+      case ArbiterScopeNames.Activity:
+      case ArbiterScopeNames.BusinessApplication:
+      case ArbiterScopeNames.ExternalEvent:
+        return {
+          length: 5,
+          checksum: 3,
+          salt: 'rfi_oid'
+        };
       case AlphaScopeNames.Buyer:
         return {
           length: 4,
@@ -66,13 +76,17 @@ export class CheckdigitOidFactory implements OidFactory {
     }
     const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
     const shortcode = ScopeRegistry.getKey(scopename);
-    const encoded = this.getEncoder(scopename).encode(id);
-    const check_digit = this.checksumDigit(encoded, checksum);
-    return new Oid2(`${shortcode}_${encoded}${check_digit}`);
+    const suffix = this.getEncoder(scopename).encode(id);
+    const check_digit = this.checksumDigit(suffix, checksum);
+    return new Oid2(`${shortcode}_${suffix}${check_digit}`);
   }
 
   verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string {
-    const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scope);
+    const { checksum, length } = CheckdigitOidFactory.GetHashidOidOptions(scope);
+    if (Reflect.get(ArbiterScopeNames, scope) && suffix.length === length) {
+      // We've consumed an Arbiter hashid that was created without a check digit
+      return suffix;
+    }
     const hashLength = suffix.length - 1;
     const checksumDigit = suffix.substring(hashLength, hashLength + 1);
     const hash = suffix.substring(0, hashLength);

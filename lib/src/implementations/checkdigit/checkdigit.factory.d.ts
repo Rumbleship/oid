@@ -3,11 +3,13 @@ import { OidFactory } from '../oid-factory.interface';
 import { Oid2 } from '../../oid';
 export declare class CheckdigitOidFactory implements OidFactory {
     static GetHashidOidOptions(scopename: string): {
-        shortcode: string;
+        length: number;
         checksum: number;
         salt: string;
+        shortcode?: undefined;
     } | {
         shortcode: null;
+        length: number;
         checksum: number;
         salt: string;
     };

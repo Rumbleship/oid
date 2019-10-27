@@ -2,6 +2,8 @@ import { OidFactory } from './implementations/oid-factory.interface';
 export declare class Oid2 {
     oid: string;
     private static readonly registry;
+    valueOf(): string;
+    toString(): string;
     static RegisterScope(scope: string, shortcode?: string): string | number;
     static getFactoryByScopename(scopename: string): OidFactory;
     static getFactoryByEncoded(external_oid: string): OidFactory;

@@ -15,11 +15,11 @@ export class ScopeRegistry {
 
   static getScopeType(scopename: string): ScopeTypes {
     if (Reflect.get(PlainScopeNames, scopename)) {
-      return ScopeTypes.OID;
+      return ScopeTypes.CHECKDIGIT;
     }
 
     if (Reflect.get(AlphaScopeNames, scopename)) {
-      return ScopeTypes.HASHID;
+      return ScopeTypes.CHECKDIGIT;
     }
 
     if (Reflect.get(TildeScopeNames, scopename)) {
@@ -62,7 +62,7 @@ export class ScopeRegistry {
         ScopeRegistry.registeredByScopename.set(scopename, shortcode);
         ScopeRegistry.registeredByKey.set(shortcode, scopename);
         return shortcode;
-      case ScopeTypes.HASHID:
+      case ScopeTypes.CHECKDIGIT:
         if (!shortcode) {
           throw new Error('Hashid scopes must declare their shortcode');
         }

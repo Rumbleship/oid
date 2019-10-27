@@ -1,6 +1,6 @@
 export enum ScopeTypes {
   OID = 'OID',
   TILDE = 'TILDE',
-  HASHID = 'HASHID',
+  CHECKDIGIT = 'CHECKDIGIT',
   EXPERIMENTAL = 'EXPERIMENTAL'
 }
