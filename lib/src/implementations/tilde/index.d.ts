@@ -1,2 +1,2 @@
 export * from './tilde.factory';
-export * from './tildes';
+export * from './tilde.scopes';

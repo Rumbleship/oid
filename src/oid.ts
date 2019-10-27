@@ -1,7 +1,7 @@
+import { CheckdigitOidFactory } from './implementations/checkdigit/checkdigit.factory';
 import { scopeRegistry, ScopeRegistry } from './implementations/scope-registry';
 import { OidFactoryMapByScope } from './implementations/scope-to-factory.lookup';
 import { OidFactory } from './implementations/oid-factory.interface';
-import { PlainOidFactory } from './implementations/plain';
 import { TildeOidFactory } from './implementations/tilde';
 
 function fromBase64(source: string): string {
@@ -25,7 +25,7 @@ export class Oid2 {
     return Oid2.registry.register(scope, shortcode);
   }
   static getFactoryByScopename(scopename: string): OidFactory {
-    const factory = OidFactoryMapByScope.get(scopename) || new PlainOidFactory();
+    const factory = OidFactoryMapByScope.get(scopename) || new CheckdigitOidFactory();
     if (!factory) {
       throw new Error('Scope has no corresponding factory.');
     }

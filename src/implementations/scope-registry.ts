@@ -1,8 +1,6 @@
 import * as xxhash from 'xxhash';
-import { PlainScopeNames } from './plain';
 import { ScopeTypes } from './types';
-import { AlphaHashidScopes } from './checkdigit';
-import { TildeScopeNames } from './tilde';
+import { Scopes, NoCheckdigitArbiterScopes, AlphaHashidScopes, TildeScopeNames } from './scopes';
 
 export class ScopeRegistry {
   static ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -14,11 +12,11 @@ export class ScopeRegistry {
   >();
 
   static getScopeType(scopename: string): ScopeTypes {
-    if (Reflect.get(PlainScopeNames, scopename)) {
-      return ScopeTypes.CHECKDIGIT;
-    }
-
-    if (Reflect.get(AlphaHashidScopes, scopename)) {
+    if (
+      Reflect.get(AlphaHashidScopes, scopename) ||
+      Reflect.get(NoCheckdigitArbiterScopes, scopename) ||
+      Reflect.get(Scopes, scopename)
+    ) {
       return ScopeTypes.CHECKDIGIT;
     }
 
@@ -55,16 +53,9 @@ export class ScopeRegistry {
     }
     switch (ScopeRegistry.getScopeType(scopename)) {
       case ScopeTypes.EXPERIMENTAL:
-      case ScopeTypes.OID:
-        if (!shortcode) {
-          throw new Error('PlainOid scopes must declare their shortcode');
-        }
-        ScopeRegistry.registeredByScopename.set(scopename, shortcode);
-        ScopeRegistry.registeredByKey.set(shortcode, scopename);
-        return shortcode;
       case ScopeTypes.CHECKDIGIT:
         if (!shortcode) {
-          throw new Error('Hashid scopes must declare their shortcode');
+          throw new Error('PlainOid scopes must declare their shortcode');
         }
         ScopeRegistry.registeredByScopename.set(scopename, shortcode);
         ScopeRegistry.registeredByKey.set(shortcode, scopename);

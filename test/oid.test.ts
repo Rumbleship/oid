@@ -62,18 +62,18 @@ describe('Scenario: Experimental Oids can be registered', () => {
         });
       });
     });
-    describe.each([
-      ['Workflow', 'wf', ScopeTypes.OID],
-      ['PurchaseOrder', 'po', ScopeTypes.CHECKDIGIT]
-    ])('When: registering a scope for %s, of type %s', (scope, shortcode, scopeType) => {
-      let key: string | number;
-      beforeAll(() => {
-        key = Oid2.RegisterScope(scope as string, shortcode);
-      });
-      test('Then: the shortcode is returned as the key', () => {
-        expect(key).toBe(shortcode);
-      });
-    });
+    describe.each([['PurchaseOrder', 'po', ScopeTypes.CHECKDIGIT]])(
+      'When: registering a scope for %s, of type %s',
+      (scope, shortcode, scopeType) => {
+        let key: string | number;
+        beforeAll(() => {
+          key = Oid2.RegisterScope(scope as string, shortcode);
+        });
+        test('Then: the shortcode is returned as the key', () => {
+          expect(key).toBe(shortcode);
+        });
+      }
+    );
 
     const UnregisteredScope = 'UnregisteredScope';
     describe(`Given: an unregistered scope '${UnregisteredScope}'`, () => {
