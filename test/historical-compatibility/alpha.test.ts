@@ -30,3 +30,30 @@ describe.each([
     });
   }
 );
+
+describe('Given: six-digit oid_string that corresponds to a historical alpha Oid', () => {
+  const scope = 'PurchaseOrder';
+  const oid_string: string = 'po_v6vlza';
+  const database_id: number = 100000;
+  Oid.RegisterScope('PurchaseOrder', 'po');
+  describe('When: creating an Oid from (Scope|database_id)', () => {
+    let oid: Oid;
+    beforeAll(() => {
+      oid = Oid.create(scope, database_id);
+    });
+    test('Then: the wrapped oid_string is the expected 6-digit suffix', () => {
+      expect(oid.oid).toBe(oid_string);
+    });
+  });
+  describe('When: instantiating an oid', () => {
+    let oid: Oid;
+    beforeAll(() => {
+      oid = new Oid(oid_string);
+    });
+    test('Then: the instance can be unwrapped to known (Scope|database_id)', () => {
+      const { scope: unwrappedScope, id } = oid.unwrap();
+      expect(unwrappedScope).toBe(scope);
+      expect(id).toBe(database_id);
+    });
+  });
+});
