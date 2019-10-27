@@ -73,9 +73,14 @@ A singleton that manages the mapping of Scope <--> Shortcode
 
 ## Overview of history of identifiers at Rumbleship:
 Generation of what are now called Oids started in Alpha, with the word "hashid". The initial implementation was 
-#### Alpha
-The first oids were created in and by Alpha. The database_id was hashed, checksumed, prefixed, and then stored in the database as a separate column. This 
+#### Alpha and Arbiter
+Both Alpha and Arbiter oids conform to the `${shortcode}_${hash}` format. Alpha's were created with a checkdigit and a minimum length of 4; Arbiter's had no check digit and a minimum length of 5.
 
-### Alpha
+The net result of this can be used to determine whether an oid is an Alpha Oid, a old Arbiter Oid, or a modern one that has a checkdigit.
+- If an oid_string is of an Alpha scope, it has a checkdigit.
+- If an oid_string is of an Arbiter scope and is 5 characters long, it has no checkdigit. 
+- If an oid_string is 5 characters long and of an Arbiter scope, it is an Arbiter oid with no checkdigit
+- If an old_string is 6+ characters long, it has a checkdigit.
+
 ### Banking
-### Arbiter
+Banking Oids look significantly different; they did not use shortcode prefixes. Instead, they hashed the `Scope` into a number and then base64 encode a stringified JSON object ```{scope, id}```. To guarantee that we can distinguish these from any other oid, we prefix them with a `~`, e.g. `~eyfaoethb`.
