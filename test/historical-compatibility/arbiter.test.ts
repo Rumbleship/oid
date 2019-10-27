@@ -1,4 +1,4 @@
-import { Oid2 } from '../../src/oid';
+import { Oid } from '../../src/oid';
 
 /**
  * The initial release of Arbiter included Oid generation that had no checkdigits
@@ -18,12 +18,12 @@ describe.each([
   'Given: A Scope: %s, shortcode: %s, dbid: %i and existing no_checkdigit hashid: %s set exists',
   (scope, shortcode, database_id, oid_no_checkdigit, checkdigit) => {
     beforeAll(() => {
-      Oid2.RegisterScope(scope as string, shortcode as string);
+      Oid.RegisterScope(scope as string, shortcode as string);
     });
     describe('When: creating an Oid from (Scope|database_id)', () => {
-      let oid: Oid2;
+      let oid: Oid;
       beforeAll(() => {
-        oid = Oid2.create(scope as string, database_id);
+        oid = Oid.create(scope as string, database_id);
       });
       test('Then: the wrapped `oid_string` is at least 5 characters + a checkdigit', () => {
         expect(oid.oid.length).toBeGreaterThanOrEqual(6);
@@ -38,9 +38,9 @@ describe.each([
     });
     describe('When: instantiating an Oid to wrap an oid_string', () => {
       describe('And: the oid_string has a checkdigit', () => {
-        let oid: Oid2;
+        let oid: Oid;
         beforeAll(() => {
-          oid = new Oid2((oid_no_checkdigit as string) + checkdigit);
+          oid = new Oid((oid_no_checkdigit as string) + checkdigit);
         });
         test('Then: the instance can be unwrapped', () => {
           const { scope: unwrappedScope, id } = oid.unwrap();
@@ -51,9 +51,9 @@ describe.each([
     });
     describe('When: instantiating an Oid to wrap an oid_string', () => {
       describe('And: the oid_string does not have a checkdigit', () => {
-        let oid: Oid2;
+        let oid: Oid;
         beforeAll(() => {
-          oid = new Oid2(oid_no_checkdigit as string);
+          oid = new Oid(oid_no_checkdigit as string);
         });
         test('Then: the instance can be unwrapped', () => {
           const { scope: unwrappedScope, id } = oid.unwrap();

@@ -1,4 +1,4 @@
-import { Oid2 } from '../../oid';
+import { Oid } from '../../oid';
 import { ScopeRegistry } from '../scope-registry';
 import { OidFactory } from '../oid-factory.interface';
 
@@ -18,9 +18,9 @@ export class TildeOidFactory implements OidFactory {
     const key = ScopeRegistry.getKey(scopename);
     const oid_json = JSON.stringify({ key, id });
     const encoded = toBase64(oid_json);
-    return new Oid2(`~${encoded}`);
+    return new Oid(`~${encoded}`);
   }
-  unwrap(oid: Oid2): { scope: string; id: string | number } {
+  unwrap(oid: Oid): { scope: string; id: string | number } {
     const plain = fromBase64(oid.oid[0] === '~' ? oid.oid.substring(1) : oid.oid);
     const { id, key } = JSON.parse(plain);
     const scope = ScopeRegistry.getScopename(key);

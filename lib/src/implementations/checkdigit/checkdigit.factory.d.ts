@@ -1,6 +1,6 @@
 import Hashids from 'hashids';
 import { OidFactory } from '../oid-factory.interface';
-import { Oid2 } from '../../oid';
+import { Oid } from '../../oid';
 export declare class CheckdigitOidFactory implements OidFactory {
     static GetHashidOidOptions(scopename: string): {
         length: number;
@@ -8,9 +8,9 @@ export declare class CheckdigitOidFactory implements OidFactory {
         salt: string;
     };
     checksumDigit(oid_suffix: string, checksum?: number): string;
-    create(scopename: string, id: string | number): Oid2;
+    create(scopename: string, id: string | number): Oid;
     verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string;
-    unwrap(oid: Oid2): {
+    unwrap(oid: Oid): {
         scope: string;
         id: string | number;
     };

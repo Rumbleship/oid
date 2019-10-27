@@ -3,7 +3,7 @@ import Hashids from 'hashids';
 import { AlphaHashidScopes, NoCheckdigitArbiterScopes } from './historical.scopes';
 import { OidFactory } from '../oid-factory.interface';
 import { ScopeRegistry } from '../scope-registry';
-import { Oid2 } from '../../oid';
+import { Oid } from '../../oid';
 
 export class CheckdigitOidFactory implements OidFactory {
   static GetHashidOidOptions(scopename: string) {
@@ -76,7 +76,7 @@ export class CheckdigitOidFactory implements OidFactory {
     const shortcode = ScopeRegistry.getKey(scopename);
     const suffix = this.getEncoder(scopename).encode(id);
     const check_digit = this.checksumDigit(suffix, checksum);
-    return new Oid2(`${shortcode}_${suffix}${check_digit}`);
+    return new Oid(`${shortcode}_${suffix}${check_digit}`);
   }
 
   verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string {
@@ -93,7 +93,7 @@ export class CheckdigitOidFactory implements OidFactory {
     }
     return hash;
   }
-  unwrap(oid: Oid2): { scope: string; id: string | number } {
+  unwrap(oid: Oid): { scope: string; id: string | number } {
     const matches = ScopeRegistry.hashIdRegEx.exec(oid.oid);
     if (!matches || (matches && matches.length !== 3)) {
       throw new Error(`Malformed oid format: ${oid.oid}`);

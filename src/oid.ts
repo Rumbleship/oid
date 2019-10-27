@@ -8,7 +8,7 @@ function fromBase64(source: string): string {
   return Buffer.from(source, 'base64').toString('ascii');
 }
 
-export class Oid2 {
+export class Oid {
   private static readonly registry = scopeRegistry;
 
   // Overide Object.valueOf so that the GraphQL ID type can convert to the 'primitive' type. In this case a
@@ -22,7 +22,7 @@ export class Oid2 {
   }
 
   static RegisterScope(scope: string, shortcode?: string) {
-    return Oid2.registry.register(scope, shortcode);
+    return Oid.registry.register(scope, shortcode);
   }
   static getFactoryByScopename(scopename: string): OidFactory {
     const factory = OidFactoryMapByScope.get(scopename) || new CheckdigitOidFactory();
@@ -52,21 +52,21 @@ export class Oid2 {
     return this.getFactoryByScopename(scope);
   }
   static create(scopename: string, id: string | number) {
-    const factory = Oid2.getFactoryByScopename(scopename);
+    const factory = Oid.getFactoryByScopename(scopename);
     return factory.create(scopename, id);
   }
   constructor(public oid: string) {}
 
   unwrap(): { id: string | number; scope: string } {
-    const factory = Oid2.getFactoryByEncoded(this.oid);
+    const factory = Oid.getFactoryByEncoded(this.oid);
     return factory.unwrap(this);
   }
 
   static unregisterScopes() {
-    Oid2.registry.resetRegistery();
+    Oid.registry.resetRegistery();
   }
 }
 
-Oid2.RegisterScope('BankAccount');
-Oid2.RegisterScope('PurchaseOrder', 'po');
-Oid2.RegisterScope('Workflow', 'wf');
+Oid.RegisterScope('BankAccount');
+Oid.RegisterScope('PurchaseOrder', 'po');
+Oid.RegisterScope('Workflow', 'wf');
