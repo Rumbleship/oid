@@ -156,7 +156,7 @@ describe('Scenario: creating Checkdigit Oids', () => {
     });
     const database_id = 1;
     const hashed_no_checkdigit = 'wf_ovjey';
-    const hashed_and_checkdigit = 'wf_ovjeyr';
+    const hashed_and_checkdigit = 'wf_ovjeyo';
     describe.each([
       ['No checkdigit', hashed_no_checkdigit],
       ['With checkdigit', hashed_and_checkdigit]
