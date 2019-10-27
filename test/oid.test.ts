@@ -88,67 +88,6 @@ describe('Scenario: Experimental Oids can be registered', () => {
   });
 });
 
-describe('Scenario: creating CheckDigitOids:Alpha', () => {
-  describe.each([
-    ['PurchaseOrder', 'po', 1, 'po_781nx'],
-    ['Shipment', 'shp', 1, 'shp_jdxri'],
-    ['Buyer', 'b', 1, 'b_ngdn2'],
-    ['Supplier', 's', 2, 's_2yon0'],
-    ['User', 'u', 1, 'u_76ykw']
-  ])(
-    'Given:  a %s scope has been registered with shortcode %s',
-    (scopeName, shortcode, database_id, knownHashidFromAlpha) => {
-      beforeAll(() => {
-        Oid2.RegisterScope(scopeName as string, shortcode as string);
-      });
-      describe('When: creating an oid from a known database_id', () => {
-        let oid: Oid2;
-        beforeAll(() => {
-          oid = Oid2.create(scopeName as string, database_id);
-        });
-        test('Then: it hashes mas expected', () => {
-          expect(oid.oid).toBe(knownHashidFromAlpha);
-        });
-        test('Then: it can be unwrapped', () => {
-          const { scope, id } = oid.unwrap();
-          expect(scope).toBe(scope);
-          expect(id).toBe(database_id);
-        });
-      });
-    }
-  );
-});
-
-describe('Scenario: working with CheckDigitOids:Arbiter, no-checkdigit', () => {
-  describe.each([
-    ['Workflow', 'wf', 1, 'wf_ovjey', 'wf_ovjeyo'],
-    ['Activity', 'act', 1, 'act_ovjey', 'act_ovjeyo'],
-    ['BusinessApplication', 'be', 1, 'be_ovjey', 'be_ovjeyo'],
-    ['ExternalEvent', 'ee', 1, 'ee_ovjey', 'ee_ovjeyo']
-  ])(
-    'Given: A Scope: %s, shortcode: %s, dbid: %i and existing hashid: %s set exists',
-    (scope, shortcode, database_id, oid_no_checkdigit, oid_with_checkdigit) => {
-      beforeAll(() => {
-        Oid2.RegisterScope(scope as string, shortcode as string);
-      });
-      describe('When: creating an Oid from Scope|database_id', () => {
-        let oid: Oid2;
-        beforeAll(() => {
-          oid = Oid2.create(scope as string, database_id);
-        });
-        test('Then: a checkdigit oid is created', () => {
-          expect(oid.oid).toBe(oid_with_checkdigit);
-        });
-        test('Then: the created oid can be unwrapped to the scope|database_id pair', () => {
-          const { scope: unwrappedScope, id } = oid.unwrap();
-          expect(unwrappedScope).toBe(scope);
-          expect(id).toBe(database_id);
-        });
-      });
-    }
-  );
-});
-
 describe('Scenario: creating Checkdigit Oids', () => {
   describe('Given: a Workflow scope has been registered', () => {
     beforeAll(() => {

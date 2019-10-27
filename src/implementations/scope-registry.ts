@@ -1,7 +1,7 @@
 import * as xxhash from 'xxhash';
 import { PlainScopeNames } from './plain';
 import { ScopeTypes } from './types';
-import { AlphaScopeNames } from './checkdigit';
+import { AlphaHashidScopes } from './checkdigit';
 import { TildeScopeNames } from './tilde';
 
 export class ScopeRegistry {
@@ -18,7 +18,7 @@ export class ScopeRegistry {
       return ScopeTypes.CHECKDIGIT;
     }
 
-    if (Reflect.get(AlphaScopeNames, scopename)) {
+    if (Reflect.get(AlphaHashidScopes, scopename)) {
       return ScopeTypes.CHECKDIGIT;
     }
 

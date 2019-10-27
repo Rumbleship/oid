@@ -1,4 +1,4 @@
-export declare enum AlphaScopeNames {
+export declare enum AlphaHashidScopes {
     Buyer = "Buyer",
     Supplier = "Supplier",
     PurchaseOrder = "PurchaseOrder",

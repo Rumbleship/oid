@@ -1,61 +1,59 @@
-import { ArbiterScopeNames } from './arbiter.scopes';
 import Hashids from 'hashids';
 
+import { AlphaHashidScopes, NoCheckdigitArbiterScopes } from './historical.scopes';
 import { OidFactory } from '../oid-factory.interface';
-import { AlphaScopeNames } from './alpha.scopes';
 import { ScopeRegistry } from '../scope-registry';
 import { Oid2 } from '../../oid';
 
 export class CheckdigitOidFactory implements OidFactory {
   static GetHashidOidOptions(scopename: string) {
-    switch (scopename) {
-      case ArbiterScopeNames.Workflow:
-      case ArbiterScopeNames.Activity:
-      case ArbiterScopeNames.BusinessApplication:
-      case ArbiterScopeNames.ExternalEvent:
-        return {
-          length: 5,
-          checksum: 3,
-          salt: 'rfi_oid'
-        };
-      case AlphaScopeNames.Buyer:
-        return {
-          length: 4,
-          checksum: 2,
-          salt: 'Division'
-        };
-      case AlphaScopeNames.Supplier:
-        return {
-          length: 4,
-          checksum: 2,
-          salt: 'Division'
-        };
-      case AlphaScopeNames.User:
-        return {
-          length: 4,
-          checksum: 2,
-          salt: 'User'
-        };
-      case AlphaScopeNames.PurchaseOrder:
-        return {
-          length: 4,
-          checksum: 3,
-          salt: 'purchaseOrder'
-        };
-      case AlphaScopeNames.Shipment:
-        return {
-          length: 4,
-          checksum: 5,
-          salt: 'shipment'
-        };
-      default:
-        return {
-          shortcode: null, // TODO FIX THIS??
-          length: 6,
-          checksum: 6,
-          salt: 'rfi_oid'
-        };
+    if (Reflect.get(NoCheckdigitArbiterScopes, scopename)) {
+      return {
+        length: 5,
+        checksum: 3,
+        salt: 'rfi_oid'
+      };
     }
+    if (Reflect.get(AlphaHashidScopes, scopename)) {
+      switch (scopename) {
+        case AlphaHashidScopes.Buyer:
+          return {
+            length: 4,
+            checksum: 2,
+            salt: 'Division'
+          };
+        case AlphaHashidScopes.Supplier:
+          return {
+            length: 4,
+            checksum: 2,
+            salt: 'Division'
+          };
+        case AlphaHashidScopes.User:
+          return {
+            length: 4,
+            checksum: 2,
+            salt: 'User'
+          };
+        case AlphaHashidScopes.PurchaseOrder:
+          return {
+            length: 4,
+            checksum: 3,
+            salt: 'purchaseOrder'
+          };
+        case AlphaHashidScopes.Shipment:
+          return {
+            length: 4,
+            checksum: 5,
+            salt: 'shipment'
+          };
+      }
+    }
+
+    return {
+      length: 6,
+      checksum: 6,
+      salt: 'rfi_oid'
+    };
   }
 
   checksumDigit(oid_suffix: string, checksum: number = 0) {
@@ -83,7 +81,7 @@ export class CheckdigitOidFactory implements OidFactory {
 
   verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string {
     const { checksum, length } = CheckdigitOidFactory.GetHashidOidOptions(scope);
-    if (Reflect.get(ArbiterScopeNames, scope) && suffix.length === length) {
+    if (Reflect.get(NoCheckdigitArbiterScopes, scope) && suffix.length === length) {
       // We've consumed an Arbiter hashid that was created without a check digit
       return suffix;
     }

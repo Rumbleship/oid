@@ -6,12 +6,6 @@ export declare class CheckdigitOidFactory implements OidFactory {
         length: number;
         checksum: number;
         salt: string;
-        shortcode?: undefined;
-    } | {
-        shortcode: null;
-        length: number;
-        checksum: number;
-        salt: string;
     };
     checksumDigit(oid_suffix: string, checksum?: number): string;
     create(scopename: string, id: string | number): Oid2;
