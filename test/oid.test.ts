@@ -157,3 +157,37 @@ describe('Scenario: creating Tilde Oids', () => {
     });
   });
 });
+
+describe('Feature: an Oid can be serialized for GQL', () => {
+  describe('Given: a known `oid_string` mapped to a known (Scope, database_id) pair', () => {
+    const oid_string = 'po_781nx';
+    const scope = 'PurchaseOrder';
+    const database_id = 1;
+    describe('And: the instance has been constructed from the (scope,database) pair', () => {
+      const oid = Oid.create(scope, database_id);
+      describe('When: invoking `valueOf` on the instance', () => {
+        test('Then: the wrapped oid_string is returned', () => {
+          expect(oid.valueOf()).toBe(oid_string);
+        });
+      });
+      describe('When: invoking `toString` on the instance', () => {
+        test('Then: the wrapped oid_string is returned', () => {
+          expect(oid.toString()).toBe(oid_string);
+        });
+      });
+    });
+    describe('And: the instance has been constructed `oid_string`', () => {
+      const oid = new Oid(oid_string);
+      describe('When: invoking `valueOf` on the instance', () => {
+        test('Then: the wrapped oid_string is returned', () => {
+          expect(oid.valueOf()).toBe(oid_string);
+        });
+      });
+      describe('When: invoking `toString` on the instance', () => {
+        test('Then: the wrapped oid_string is returned', () => {
+          expect(oid.toString()).toBe(oid_string);
+        });
+      });
+    });
+  });
+});
