@@ -1,7 +1,8 @@
-import { ScopeRegistrationError, UnregisteredScopeError } from './../src/errors/index';
 import 'reflect-metadata';
+import { ScopeRegistrationError, UnregisteredScopeError } from './../src/errors/index';
 import { ScopeTypes } from '../src/implementations/types';
 import { Oid } from '../src';
+import { Scope } from '../src/scope';
 
 describe('Scenario: registering Oids', () => {
   describe('Feature: An Oid that is not registered globally can be registered', () => {
@@ -12,12 +13,12 @@ describe('Scenario: registering Oids', () => {
       describe('When: registering a non-enumerated scope', () => {
         const ExperimentalScope = 'ExperimentalScope';
         const experimentalShortcode = 'es';
-        let key: string | number;
+        let scope: Scope;
         beforeAll(() => {
-          key = Oid.RegisterScope(ExperimentalScope, experimentalShortcode);
+          scope = Oid.RegisterScope(ExperimentalScope, experimentalShortcode);
         });
         test('Then: the specified shortcode should be returned as a key', () => {
-          expect(key).toBe(experimentalShortcode);
+          expect(scope.key).toBe(experimentalShortcode);
         });
         describe('And Given: an oid exists, wrapping a known database_id and the experimental scope', () => {
           let oid: Oid;
@@ -26,18 +27,18 @@ describe('Scenario: registering Oids', () => {
             oid = Oid.Create('ExperimentalScope', database_id);
           });
           test('Then: it can be unwrapped', () => {
-            const { scope, id } = oid.unwrap();
-            expect(scope).toBe(ExperimentalScope);
+            const { scope: unwrappedScope, id } = oid.unwrap();
+            expect(unwrappedScope).toBe(ExperimentalScope);
             expect(id).toBe(database_id);
           });
         });
         describe('When: registering the same scope, same shortcode', () => {
-          let key2: string | number;
+          let scope2: Scope;
           beforeAll(() => {
-            key2 = Oid.RegisterScope(ExperimentalScope, experimentalShortcode);
+            scope2 = Oid.RegisterScope(ExperimentalScope, experimentalShortcode);
           });
           test('Then: the specified shortcode should be returned as a key', () => {
-            expect(key2).toBe(experimentalShortcode);
+            expect(scope2.key).toBe(experimentalShortcode);
           });
         });
         describe('When: registering the same scope, NEW shortcode', () => {
@@ -49,32 +50,37 @@ describe('Scenario: registering Oids', () => {
         });
       });
       describe('When: registering a scope for BankAccounts, of type known to be TILDE', () => {
-        let key: string | number;
+        let scope: Scope;
         beforeAll(() => {
-          key = Oid.RegisterScope('BankAccount');
+          scope = Oid.RegisterScope('BankAccount');
         });
-        test('Then: a stable numeric hash key is returned', () => {
-          expect(key).toMatchInlineSnapshot('2979548881');
+        test('Then: a Scope that wraps a stable numeric hash key is returned', () => {
+          expect(scope).toBeInstanceOf(Scope);
+          expect(scope.key).toMatchInlineSnapshot('2979548881');
         });
         describe('When: re-registering the same scope', () => {
-          let key2: string | number;
+          let scope2: Scope;
           beforeAll(() => {
-            key2 = Oid.RegisterScope('BankAccount');
+            scope2 = Oid.RegisterScope('BankAccount');
           });
-          test('Then: a stable numeric hash key is returned', () => {
-            expect(key2).toMatchInlineSnapshot('2979548881');
+          test('Then: a Scope that wraps a stable numeric hash key is returned', () => {
+            expect(scope2).toBeInstanceOf(Scope);
+            expect(scope2.key).toMatchInlineSnapshot('2979548881');
           });
         });
       });
       describe.each([['PurchaseOrder', 'po', ScopeTypes.CHECKDIGIT]])(
         'When: registering a scope for %s, of type %s',
         (scope, shortcode, scopeType) => {
-          let key: string | number;
+          let registeredScope: Scope;
           beforeAll(() => {
-            key = Oid.RegisterScope(scope as string, shortcode);
+            registeredScope = Oid.RegisterScope(scope as string, shortcode);
+          });
+          test('Then: an instance of Scope is returned', () => {
+            expect(registeredScope).toBeInstanceOf(Scope);
           });
           test('Then: the shortcode is returned as the key', () => {
-            expect(key).toBe(shortcode);
+            expect(registeredScope.key).toBe(shortcode);
           });
         }
       );

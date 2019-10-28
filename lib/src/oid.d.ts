@@ -1,11 +1,11 @@
 import { OidFactory } from './implementations/oid-factory.interface';
 export declare class Oid {
     oid: string;
-    id: string | number;
-    scope: string;
+    private id;
+    private scope;
     private factory;
     private static readonly registry;
-    static RegisterScope(scope: string, shortcode?: string): string | number;
+    static RegisterScope(scope: string, shortcode?: string): import("./scope").Scope;
     static UnregisterScopes(): void;
     static GetFactoryByScopename(scopename: string): OidFactory;
     static GetFactoryByEncoded(external_oid: string): OidFactory;

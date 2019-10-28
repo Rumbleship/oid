@@ -1,5 +1,5 @@
 export * from './checkdigit/historical.scopes';
 export * from './tilde/tilde.scopes';
-export declare enum Scopes {
+export declare enum CheckdigitScopes {
     Company = "Company"
 }

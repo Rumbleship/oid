@@ -10,8 +10,8 @@ function fromBase64(source: string): string {
 }
 
 export class Oid {
-  public id: string | number;
-  public scope: string;
+  private id: string | number;
+  private scope: string;
   private factory: OidFactory;
   private static readonly registry = scopeRegistry;
 
@@ -61,17 +61,12 @@ export class Oid {
     return { id: this.id, scope: this.scope };
   }
 
-  // Overide Object.valueOf so that the GraphQL ID type can convert to the 'primitive' type. In this case a
-  // string.
-  valueOf() {
+  // Overide Object.valueOf so GraphQL ID type can convert to the 'primitive' type
+  valueOf(): string {
     return this.oid;
   }
 
-  toString() {
+  toString(): string {
     return this.oid;
   }
 }
-
-Oid.RegisterScope('BankAccount');
-Oid.RegisterScope('PurchaseOrder', 'po');
-Oid.RegisterScope('Workflow', 'wf');

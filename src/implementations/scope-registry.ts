@@ -1,7 +1,13 @@
-import { ScopeRegistrationError, UnregisteredScopeError } from './../errors/index';
 import * as xxhash from 'xxhash';
+import { ScopeRegistrationError, UnregisteredScopeError } from './../errors/index';
 import { ScopeTypes } from './types';
-import { Scopes, NoCheckdigitArbiterScopes, AlphaHashidScopes, TildeScopeNames } from './scopes';
+import {
+  CheckdigitScopes,
+  NoCheckdigitArbiterScopes,
+  AlphaHashidScopes,
+  TildeScopeNames
+} from './scopes';
+import { Scope } from '../scope';
 
 export class ScopeRegistry {
   static ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -16,7 +22,7 @@ export class ScopeRegistry {
     if (
       Reflect.get(AlphaHashidScopes, scopename) ||
       Reflect.get(NoCheckdigitArbiterScopes, scopename) ||
-      Reflect.get(Scopes, scopename)
+      Reflect.get(CheckdigitScopes, scopename)
     ) {
       return ScopeTypes.CHECKDIGIT;
     }
@@ -44,7 +50,7 @@ export class ScopeRegistry {
     return key;
   }
 
-  register(scopename: string, shortcode?: string): string | number {
+  register(scopename: string, shortcode?: string): Scope {
     const registeredKey = ScopeRegistry.registeredByScopename.get(scopename);
 
     if (registeredKey && shortcode && registeredKey !== shortcode) {
@@ -60,12 +66,12 @@ export class ScopeRegistry {
         }
         ScopeRegistry.registeredByScopename.set(scopename, shortcode);
         ScopeRegistry.registeredByKey.set(shortcode, scopename);
-        return shortcode;
+        return new Scope(shortcode, scopename);
       case ScopeTypes.TILDE:
         const key = xxhash.hash(Buffer.from(scopename), 0xcafecafe);
         ScopeRegistry.registeredByScopename.set(scopename, key);
         ScopeRegistry.registeredByKey.set(key, scopename);
-        return key;
+        return new Scope(key, scopename);
     }
   }
 

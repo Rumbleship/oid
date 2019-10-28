@@ -1,3 +1,4 @@
+import { CheckdigitScopes } from './scopes';
 import { CheckdigitOidFactory, AlphaHashidScopes, NoCheckdigitArbiterScopes } from './checkdigit';
 import { TildeOidFactory, TildeScopeNames } from './tilde';
 import { OidFactory } from './oid-factory.interface';
@@ -11,7 +12,8 @@ for (const scopeName of Object.keys(TildeScopeNames)) {
 }
 for (const scopeName of [
   ...Object.keys(AlphaHashidScopes),
-  ...Object.keys(NoCheckdigitArbiterScopes)
+  ...Object.keys(NoCheckdigitArbiterScopes),
+  ...Object.keys(CheckdigitScopes)
 ]) {
   OidFactoryMapByScope.set(scopeName, checkdigitFactory);
 }
