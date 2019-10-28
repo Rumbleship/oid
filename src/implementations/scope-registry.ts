@@ -7,7 +7,7 @@ import {
   AlphaHashidScopes,
   TildeScopeNames
 } from './scopes';
-import { Scope } from '../scope';
+import { Scope } from './scope';
 
 export class ScopeRegistry {
   static ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';

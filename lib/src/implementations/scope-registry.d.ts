@@ -1,5 +1,5 @@
 import { ScopeTypes } from './types';
-import { Scope } from '../scope';
+import { Scope } from './scope';
 export declare class ScopeRegistry {
     static ALPHABET: string;
     static readonly hashIdRegEx: RegExp;
