@@ -2,7 +2,7 @@ import { CheckdigitOidFactory } from './implementations/checkdigit/checkdigit.fa
 import { scopeRegistry, ScopeRegistry } from './implementations/scope-registry';
 import { OidFactoryMapByScope } from './implementations/scope-to-factory.lookup';
 import { OidFactory } from './implementations/oid-factory.interface';
-import { TildeOidFactory } from './implementations/banking';
+import { BankingOidFactory } from './implementations/banking';
 import { MalformedOidError } from './errors';
 
 function fromBase64(source: string): string {
@@ -27,7 +27,7 @@ export class Oid {
   }
   static GetFactoryByEncoded(external_oid: string): OidFactory {
     if (external_oid[0] === `~`) {
-      return new TildeOidFactory();
+      return new BankingOidFactory();
     }
 
     const matches = ScopeRegistry.hashIdRegEx.exec(external_oid);
@@ -61,7 +61,7 @@ export class Oid {
     return { id: this.id, scope: this.scope };
   }
 
-  // Overide Object.valueOf so GraphQL ID type can convert to the 'primitive' type
+  // Overide `Object.valueOf()` so GraphQL ID type can convert to the 'primitive' type
   valueOf(): string {
     return this.oid;
   }

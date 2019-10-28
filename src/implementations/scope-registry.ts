@@ -5,7 +5,7 @@ import {
   CheckdigitScopes,
   NoCheckdigitArbiterScopes,
   AlphaHashidScopes,
-  TildeScopeNames
+  BankingScopeNames
 } from './scopes.enum';
 export class Scope {
   constructor(public key: string | number, public name: string) {}
@@ -29,7 +29,7 @@ export class ScopeRegistry {
       return ScopeTypes.CHECKDIGIT;
     }
 
-    if (Reflect.get(TildeScopeNames, scopename)) {
+    if (Reflect.get(BankingScopeNames, scopename)) {
       return ScopeTypes.BANKING;
     }
 

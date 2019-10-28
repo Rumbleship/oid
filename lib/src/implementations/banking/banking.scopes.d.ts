@@ -1,4 +1,4 @@
-export declare enum TildeScopeNames {
+export declare enum BankingScopeNames {
     AchGateway = "AchGateway",
     BankAccount = "BankAccount",
     BankTransaction = "BankTransaction",

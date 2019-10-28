@@ -13,7 +13,7 @@ function fromBase64(source: string): string {
 /**
  * Specific for Banking for historic reasons
  */
-export class TildeOidFactory implements OidFactory {
+export class BankingOidFactory implements OidFactory {
   create(scopename: string, id: string | number) {
     const key = ScopeRegistry.GetKey(scopename);
     const oid_json = JSON.stringify({ key, id });
