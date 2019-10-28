@@ -2,7 +2,7 @@ import { CheckdigitOidFactory } from './implementations/checkdigit/checkdigit.fa
 import { scopeRegistry, ScopeRegistry } from './implementations/scope-registry';
 import { OidFactoryMapByScope } from './implementations/scope-to-factory.lookup';
 import { OidFactory } from './implementations/oid-factory.interface';
-import { TildeOidFactory } from './implementations/tilde';
+import { TildeOidFactory } from './implementations/banking';
 import { MalformedOidError } from './errors';
 
 function fromBase64(source: string): string {

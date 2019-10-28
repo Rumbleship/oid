@@ -30,7 +30,7 @@ export class ScopeRegistry {
     }
 
     if (Reflect.get(TildeScopeNames, scopename)) {
-      return ScopeTypes.TILDE;
+      return ScopeTypes.BANKING;
     }
 
     return ScopeTypes.EXPERIMENTAL;
@@ -69,7 +69,7 @@ export class ScopeRegistry {
         ScopeRegistry.registeredByScopename.set(scopename, shortcode);
         ScopeRegistry.registeredByKey.set(shortcode, scopename);
         return new Scope(shortcode, scopename);
-      case ScopeTypes.TILDE:
+      case ScopeTypes.BANKING:
         const key = xxhash.hash(Buffer.from(scopename), 0xcafecafe);
         ScopeRegistry.registeredByScopename.set(scopename, key);
         ScopeRegistry.registeredByKey.set(key, scopename);

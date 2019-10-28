@@ -1,5 +1,5 @@
 export declare enum ScopeTypes {
-    TILDE = "TILDE",
+    BANKING = "BANKING",
     CHECKDIGIT = "CHECKDIGIT",
     EXPERIMENTAL = "EXPERIMENTAL"
 }
