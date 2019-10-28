@@ -90,43 +90,6 @@ describe('Scenario: registering Oids', () => {
   });
 });
 
-// describe('Scenario: creating Checkdigit Oids', () => {
-//   describe('Given: a Workflow scope has been registered', () => {
-//     beforeAll(() => {
-//       Oid.RegisterScope('Workflow', 'wf');
-//     });
-//     const database_id = 1;
-//     const hashed_no_checkdigit = 'wf_ovjey';
-//     const hashed_and_checkdigit = 'wf_ovjeyo';
-//     describe.each([
-//       ['No checkdigit', hashed_no_checkdigit],
-//       ['With checkdigit', hashed_and_checkdigit]
-//     ])(
-//       'When instantiating an Oid that matches a non-alpha scope, regardless of whether the string has a checkdigit',
-//       (_, string_oid) => {
-//         let oid: Oid;
-//         beforeAll(() => {
-//           oid = new Oid(string_oid);
-//         });
-//         test('Then: it can be unwrapped to the database_id id', () => {
-//           const { scope, id } = oid.unwrap();
-//           expect(scope).toBe('Workflow');
-//           expect(id).toBe(database_id);
-//         });
-//       }
-//     );
-//     describe('When: creating an oid from a known database_id', () => {
-//       let oid: Oid;
-//       beforeAll(() => {
-//         oid = Oid.create('Workflow', database_id);
-//       });
-//       test('Then: it hashes with a checkdigit', () => {
-//         expect(oid.oid).toBe(hashed_and_checkdigit);
-//       });
-//     });
-//   });
-// });
-
 describe('Feature: an Oid can be serialized for GQL', () => {
   describe('Given: a known `oid_string` mapped to a known (Scope, database_id) pair', () => {
     const oid_string = 'po_781nx';
