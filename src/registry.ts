@@ -9,7 +9,7 @@ import { Oid } from './oid';
 /**
  * To add a new scope, declare it as in the CheckdigitScopes enum, and then its shortcode here.
  */
-export const Registry = {
+export const Registry = Object.freeze({
   [BankingScopeNames.AchGateway]: Oid.RegisterScope(BankingScopeNames.AchGateway),
   [NoCheckdigitArbiterScopes.Activity]: Oid.RegisterScope('Activity', 'act'),
   [BankingScopeNames.BankAccount]: Oid.RegisterScope(BankingScopeNames.BankAccount),
@@ -31,4 +31,4 @@ export const Registry = {
   [AlphaHashidScopes.Supplier]: Oid.RegisterScope(AlphaHashidScopes.Supplier, 's'),
   [AlphaHashidScopes.User]: Oid.RegisterScope(AlphaHashidScopes.User, 'u'),
   [NoCheckdigitArbiterScopes.Workflow]: Oid.RegisterScope(NoCheckdigitArbiterScopes.Workflow, 'wf')
-};
+});

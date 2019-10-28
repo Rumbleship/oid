@@ -2,7 +2,7 @@ import { AlphaHashidScopes, NoCheckdigitArbiterScopes, BankingScopeNames, Checkd
 /**
  * To add a new scope, declare it as in the CheckdigitScopes enum, and then its shortcode here.
  */
-export declare const Registry: {
+export declare const Registry: Readonly<{
     [BankingScopeNames.AchGateway]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.Activity]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.BankAccount]: import("./implementations/scope-registry").Scope;
@@ -18,4 +18,4 @@ export declare const Registry: {
     [AlphaHashidScopes.Supplier]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.User]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.Workflow]: import("./implementations/scope-registry").Scope;
-};
+}>;
