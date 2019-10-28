@@ -16,6 +16,14 @@ export class Oid {
     const oid = factory.create(scopename, id);
     return oid;
   }
+  /**
+   * @deprecated in favor of `Oid.Create()`
+   * @param scopename
+   * @param id
+   */
+  static create(scopename: string, id: string | number) {
+    return this.Create(scopename, id);
+  }
   constructor(public oid: string) {
     const factory = Oid.registry.getFactoryByOidString(oid);
     const { id, scope } = factory.unwrap(this);

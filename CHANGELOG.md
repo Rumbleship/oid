@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [UNRELEASED]
 
 ### Added
+  * Backwards compatible lower-case Oid.create`
 ### Removed
 ### Changed
 ### Fixed
