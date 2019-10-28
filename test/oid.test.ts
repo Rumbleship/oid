@@ -191,3 +191,15 @@ describe('Feature: an Oid can be serialized for GQL', () => {
     });
   });
 });
+
+describe('Given: a `shortcode` that does not match to a registered Scope', () => {
+  const shortcode = 'foo';
+  describe('And: it is the prefix to an `oid_string`', () => {
+    const oid_string = `${shortcode}_barbaz`;
+    describe('When: instantiating an Oid with the `oid_string`', () => {
+      test('Then: an error is thrown', () => {
+        expect(() => new Oid(oid_string)).toThrow();
+      });
+    });
+  });
+});

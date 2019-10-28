@@ -9,6 +9,7 @@ function fromBase64(source: string): string {
 }
 
 export class Oid {
+  private factory: OidFactory;
   private static readonly registry = scopeRegistry;
 
   // Overide Object.valueOf so that the GraphQL ID type can convert to the 'primitive' type. In this case a
@@ -26,9 +27,6 @@ export class Oid {
   }
   static getFactoryByScopename(scopename: string): OidFactory {
     const factory = OidFactoryMapByScope.get(scopename) || new CheckdigitOidFactory();
-    if (!factory) {
-      throw new Error('Scope has no corresponding factory.');
-    }
     return factory;
   }
   static getFactoryByEncoded(external_oid: string): OidFactory {
@@ -42,7 +40,7 @@ export class Oid {
         const { key } = JSON.parse(fromBase64(external_oid));
         return this.getFactoryByScopename(ScopeRegistry.getScopename(key));
       } catch (e) {
-        throw new Error(`Malformed oid format: ${external_oid}`);
+        throw new Error(`Malformed tilde oid format: ${external_oid}`);
       }
     }
 
@@ -53,13 +51,16 @@ export class Oid {
   }
   static create(scopename: string, id: string | number) {
     const factory = Oid.getFactoryByScopename(scopename);
-    return factory.create(scopename, id);
+    const oid = factory.create(scopename, id);
+    oid.factory = factory;
+    return oid;
   }
-  constructor(public oid: string) {}
+  constructor(public oid: string) {
+    this.factory = Oid.getFactoryByEncoded(oid);
+  }
 
   unwrap(): { id: string | number; scope: string } {
-    const factory = Oid.getFactoryByEncoded(this.oid);
-    return factory.unwrap(this);
+    return this.factory.unwrap(this);
   }
 
   static unregisterScopes() {
