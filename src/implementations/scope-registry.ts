@@ -61,9 +61,6 @@ export class ScopeRegistry {
         ScopeRegistry.registeredByKey.set(shortcode, scopename);
         return shortcode;
       case ScopeTypes.TILDE:
-        if (shortcode) {
-          throw new Error('Tilde scopes cannot declare a shortcode');
-        }
         const key = xxhash.hash(Buffer.from(scopename), 0xcafecafe);
         ScopeRegistry.registeredByScopename.set(scopename, key);
         ScopeRegistry.registeredByKey.set(key, scopename);
