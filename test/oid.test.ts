@@ -7,7 +7,7 @@ describe('Scenario: registering Oids', () => {
   describe('Feature: An Oid that is not registered globally can be registered', () => {
     describe('Given: an empty scope registry', () => {
       beforeAll(() => {
-        Oid.unregisterScopes();
+        Oid.UnregisterScopes();
       });
       describe('When: registering a non-enumerated scope', () => {
         const ExperimentalScope = 'ExperimentalScope';
@@ -23,7 +23,7 @@ describe('Scenario: registering Oids', () => {
           let oid: Oid;
           const database_id = 1;
           beforeAll(() => {
-            oid = Oid.create('ExperimentalScope', database_id);
+            oid = Oid.Create('ExperimentalScope', database_id);
           });
           test('Then: it can be unwrapped', () => {
             const { scope, id } = oid.unwrap();
@@ -84,7 +84,7 @@ describe('Scenario: registering Oids', () => {
         describe(`When: using the scope '${UnregisteredScope}' to create an Oid`, () => {
           test('Then: an error is thrown', () => {
             expect(() => {
-              Oid.create(UnregisteredScope, 2);
+              Oid.Create(UnregisteredScope, 2);
             }).toThrow(UnregisteredScopeError);
           });
         });
@@ -100,34 +100,36 @@ describe('Scenario: registering Oids', () => {
   });
 });
 
-describe('Feature: an Oid can be serialized for GQL', () => {
+describe('Scenario: an Oid can be serialized', () => {
   describe('Given: a known `oid_string` mapped to a known (Scope, database_id) pair', () => {
     const oid_string = 'po_781nx';
     const scope = 'PurchaseOrder';
     const database_id = 1;
-    describe('And: the instance has been constructed from the (scope,database) pair', () => {
-      const oid = Oid.create(scope, database_id);
-      describe('When: invoking `valueOf` on the instance', () => {
-        test('Then: the wrapped oid_string is returned', () => {
-          expect(oid.valueOf()).toBe(oid_string);
+    describe('Feature: for GQL', () => {
+      describe('And: the instance has been constructed from the (scope,database) pair', () => {
+        const oid = Oid.Create(scope, database_id);
+        describe('When: invoking `valueOf` on the instance', () => {
+          test('Then: the wrapped oid_string is returned', () => {
+            expect(oid.valueOf()).toBe(oid_string);
+          });
+        });
+        describe('When: invoking `toString` on the instance', () => {
+          test('Then: the wrapped oid_string is returned', () => {
+            expect(oid.toString()).toBe(oid_string);
+          });
         });
       });
-      describe('When: invoking `toString` on the instance', () => {
-        test('Then: the wrapped oid_string is returned', () => {
-          expect(oid.toString()).toBe(oid_string);
+      describe('And: the instance has been constructed `oid_string`', () => {
+        const oid = new Oid(oid_string);
+        describe('When: invoking `valueOf` on the instance', () => {
+          test('Then: the wrapped oid_string is returned', () => {
+            expect(oid.valueOf()).toBe(oid_string);
+          });
         });
-      });
-    });
-    describe('And: the instance has been constructed `oid_string`', () => {
-      const oid = new Oid(oid_string);
-      describe('When: invoking `valueOf` on the instance', () => {
-        test('Then: the wrapped oid_string is returned', () => {
-          expect(oid.valueOf()).toBe(oid_string);
-        });
-      });
-      describe('When: invoking `toString` on the instance', () => {
-        test('Then: the wrapped oid_string is returned', () => {
-          expect(oid.toString()).toBe(oid_string);
+        describe('When: invoking `toString` on the instance', () => {
+          test('Then: the wrapped oid_string is returned', () => {
+            expect(oid.toString()).toBe(oid_string);
+          });
         });
       });
     });

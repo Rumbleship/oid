@@ -15,24 +15,17 @@ export class Oid {
   private factory: OidFactory;
   private static readonly registry = scopeRegistry;
 
-  // Overide Object.valueOf so that the GraphQL ID type can convert to the 'primitive' type. In this case a
-  // string.
-  valueOf() {
-    return this.oid;
-  }
-
-  toString() {
-    return this.oid;
-  }
-
   static RegisterScope(scope: string, shortcode?: string) {
     return Oid.registry.register(scope, shortcode);
   }
-  static getFactoryByScopename(scopename: string): OidFactory {
+  static UnregisterScopes() {
+    Oid.registry.resetRegistery();
+  }
+  static GetFactoryByScopename(scopename: string): OidFactory {
     const factory = OidFactoryMapByScope.get(scopename) || new CheckdigitOidFactory();
     return factory;
   }
-  static getFactoryByEncoded(external_oid: string): OidFactory {
+  static GetFactoryByEncoded(external_oid: string): OidFactory {
     if (external_oid[0] === `~`) {
       return new TildeOidFactory();
     }
@@ -41,7 +34,7 @@ export class Oid {
     if (!matches || (matches && matches.length !== 3)) {
       try {
         const { key } = JSON.parse(fromBase64(external_oid));
-        return this.getFactoryByScopename(ScopeRegistry.getScopename(key));
+        return this.GetFactoryByScopename(ScopeRegistry.GetScopename(key));
       } catch (e) {
         throw new MalformedOidError(`Malformed tilde oid format: ${external_oid}`);
       }
@@ -49,29 +42,33 @@ export class Oid {
 
     const [, prefix] = matches;
 
-    const scope = ScopeRegistry.getScopename(prefix);
-    return this.getFactoryByScopename(scope);
+    const scope = ScopeRegistry.GetScopename(prefix);
+    return this.GetFactoryByScopename(scope);
   }
-  static create(scopename: string, id: string | number) {
-    const factory = Oid.getFactoryByScopename(scopename);
+  static Create(scopename: string, id: string | number) {
+    const factory = Oid.GetFactoryByScopename(scopename);
     const oid = factory.create(scopename, id);
-    oid.factory = factory;
     return oid;
   }
   constructor(public oid: string) {
-    this.factory = Oid.getFactoryByEncoded(oid);
+    this.factory = Oid.GetFactoryByEncoded(oid);
     const { id, scope } = this.factory.unwrap(this);
     this.id = id;
     this.scope = scope;
   }
 
   unwrap(): { id: string | number; scope: string } {
-    // return this.factory.unwrap(this);
     return { id: this.id, scope: this.scope };
   }
 
-  static unregisterScopes() {
-    Oid.registry.resetRegistery();
+  // Overide Object.valueOf so that the GraphQL ID type can convert to the 'primitive' type. In this case a
+  // string.
+  valueOf() {
+    return this.oid;
+  }
+
+  toString() {
+    return this.oid;
   }
 }
 

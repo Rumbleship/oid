@@ -4,9 +4,9 @@ export declare class ScopeRegistry {
     static readonly hashIdRegEx: RegExp;
     private static registeredByKey;
     private static registeredByScopename;
-    static getScopeType(scopename: string): ScopeTypes;
-    static getScopename(key: string | number): string;
-    static getKey(scopename: string): string | number;
+    static GetScopeType(scopename: string): ScopeTypes;
+    static GetScopename(key: string | number): string;
+    static GetKey(scopename: string): string | number;
     register(scopename: string, shortcode?: string): string | number;
     resetRegistery(): void;
 }

@@ -75,7 +75,7 @@ export class CheckdigitOidFactory implements OidFactory {
       throw new MalformedOidError('A Hashid Oid must be created with a db_id type:number');
     }
     const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
-    const shortcode = ScopeRegistry.getKey(scopename);
+    const shortcode = ScopeRegistry.GetKey(scopename);
     const suffix = this.getEncoder(scopename).encode(id);
     const check_digit = this.checksumDigit(suffix, checksum);
     return new Oid(`${shortcode}_${suffix}${check_digit}`);
@@ -101,7 +101,7 @@ export class CheckdigitOidFactory implements OidFactory {
       throw new MalformedOidError(`Malformed oid format: ${oid.oid}`);
     }
     const [, shortcode, suffix] = matches;
-    const scope = ScopeRegistry.getScopename(shortcode);
+    const scope = ScopeRegistry.GetScopename(shortcode);
     const hashed = this.verifyAndStripCheckDigit(scope, shortcode, suffix);
     const id = this.getEncoder(scope).decode(hashed)[0];
     return { id, scope };

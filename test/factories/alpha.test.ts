@@ -21,7 +21,7 @@ describe.each([
     describe('When: creating an Oid from a known database_id', () => {
       let oid: Oid;
       beforeAll(() => {
-        oid = Oid.create(scopeName as string, database_id);
+        oid = Oid.Create(scopeName as string, database_id);
       });
       test('Then: the computed, wrapped string is the same as known alpha string', () => {
         expect(oid.oid).toBe(known_alpha_hashid);
@@ -43,7 +43,7 @@ describe('Given: six-digit oid_string that corresponds to a historical alpha Oid
   describe('When: creating an Oid from (Scope|database_id)', () => {
     let oid: Oid;
     beforeAll(() => {
-      oid = Oid.create(scope, database_id);
+      oid = Oid.Create(scope, database_id);
     });
     test('Then: the wrapped oid_string is the expected 6-digit suffix', () => {
       expect(oid.oid).toBe(oid_string);

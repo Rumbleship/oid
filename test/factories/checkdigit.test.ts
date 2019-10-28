@@ -8,7 +8,7 @@ describe('Given: a scope `CheckdigitTest` has been registered to shortcode `cdt`
   describe('When: creating an Oid with a database_id that is a string', () => {
     const database_string_id = 'foobar';
     test('Then: an error is thrown', () => {
-      expect(() => Oid.create(scope, database_string_id)).toThrow(MalformedOidError);
+      expect(() => Oid.Create(scope, database_string_id)).toThrow(MalformedOidError);
     });
   });
   describe('When: instantiating an Oid with an invalid checkdigit', () => {

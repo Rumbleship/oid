@@ -5,16 +5,16 @@ export declare class Oid {
     scope: string;
     private factory;
     private static readonly registry;
-    valueOf(): string;
-    toString(): string;
     static RegisterScope(scope: string, shortcode?: string): string | number;
-    static getFactoryByScopename(scopename: string): OidFactory;
-    static getFactoryByEncoded(external_oid: string): OidFactory;
-    static create(scopename: string, id: string | number): Oid;
+    static UnregisterScopes(): void;
+    static GetFactoryByScopename(scopename: string): OidFactory;
+    static GetFactoryByEncoded(external_oid: string): OidFactory;
+    static Create(scopename: string, id: string | number): Oid;
     constructor(oid: string);
     unwrap(): {
         id: string | number;
         scope: string;
     };
-    static unregisterScopes(): void;
+    valueOf(): string;
+    toString(): string;
 }

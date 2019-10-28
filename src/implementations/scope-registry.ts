@@ -12,7 +12,7 @@ export class ScopeRegistry {
     string | number
   >();
 
-  static getScopeType(scopename: string): ScopeTypes {
+  static GetScopeType(scopename: string): ScopeTypes {
     if (
       Reflect.get(AlphaHashidScopes, scopename) ||
       Reflect.get(NoCheckdigitArbiterScopes, scopename) ||
@@ -28,7 +28,7 @@ export class ScopeRegistry {
     return ScopeTypes.EXPERIMENTAL;
   }
 
-  static getScopename(key: string | number): string {
+  static GetScopename(key: string | number): string {
     const scopename = this.registeredByKey.get(key);
     if (!scopename) {
       throw new UnregisteredScopeError(`key ${key} is not registered`);
@@ -36,7 +36,7 @@ export class ScopeRegistry {
     return scopename;
   }
 
-  static getKey(scopename: string): string | number {
+  static GetKey(scopename: string): string | number {
     const key = this.registeredByScopename.get(scopename);
     if (!key) {
       throw new UnregisteredScopeError(`scope ${scopename} not registered`);
@@ -52,7 +52,7 @@ export class ScopeRegistry {
         `Cannot reregister Scope:${scopename} has already been registered under shortcode:${shortcode}`
       );
     }
-    switch (ScopeRegistry.getScopeType(scopename)) {
+    switch (ScopeRegistry.GetScopeType(scopename)) {
       case ScopeTypes.EXPERIMENTAL:
       case ScopeTypes.CHECKDIGIT:
         if (!shortcode) {

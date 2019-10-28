@@ -23,7 +23,7 @@ describe.each([
     describe('When: creating an Oid from (Scope|database_id)', () => {
       let oid: Oid;
       beforeAll(() => {
-        oid = Oid.create(scope as string, database_id);
+        oid = Oid.Create(scope as string, database_id);
       });
       test('Then: the wrapped `oid_string` is at least 5 characters + a checkdigit', () => {
         expect(oid.oid.length).toBeGreaterThanOrEqual(6);

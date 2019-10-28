@@ -12,7 +12,7 @@ describe('Scenario: creating Tilde Oids', () => {
       let oid_no_tilde: Oid;
 
       beforeAll(() => {
-        oid = Oid.create('BankAccount', database_id);
+        oid = Oid.Create('BankAccount', database_id);
         oid_no_tilde = new Oid(oid.oid.substring(1, oid.oid.length));
       });
       test('Then: it hashes as expected', () => {
