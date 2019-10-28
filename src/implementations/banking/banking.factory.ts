@@ -1,13 +1,6 @@
 import { Oid } from '../../oid';
 import { OidFactory } from '../oid-factory.interface';
-
-function toBase64(source: string | number): string {
-  return Buffer.from('' + source).toString('base64');
-}
-
-function fromBase64(source: string): string {
-  return Buffer.from(source, 'base64').toString('ascii');
-}
+import { toBase64, fromBase64 } from '../../util';
 
 /**
  * Specific for Banking for historic reasons

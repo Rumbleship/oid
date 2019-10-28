@@ -14,12 +14,9 @@ import {
   AlphaHashidScopes,
   BankingScopeNames
 } from './scopes.enum';
+import { fromBase64 } from '../util';
 export class Scope {
   constructor(public key: string | number, public name: string, public type: ScopeTypes) {}
-}
-
-function fromBase64(source: string): string {
-  return Buffer.from(source, 'base64').toString('ascii');
 }
 
 class ScopeRegistry {
@@ -60,6 +57,7 @@ class ScopeRegistry {
     return key;
   }
 
+  // tslint:disable-next-line: no-empty
   constructor() {}
 
   getFactoryByScopename(scopename: string): OidFactory {
