@@ -1,3 +1,5 @@
+import { InvalidCheckdigitError } from './../../errors/index';
+import { MalformedOidError } from '../../errors';
 import Hashids from 'hashids';
 
 import { AlphaHashidScopes, NoCheckdigitArbiterScopes } from './historical.scopes';
@@ -70,7 +72,7 @@ export class CheckdigitOidFactory implements OidFactory {
   }
   create(scopename: string, id: string | number) {
     if (typeof id !== 'number') {
-      throw new Error('A Hashid Oid must be created with a db_id type:number');
+      throw new MalformedOidError('A Hashid Oid must be created with a db_id type:number');
     }
     const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
     const shortcode = ScopeRegistry.getKey(scopename);
@@ -89,14 +91,14 @@ export class CheckdigitOidFactory implements OidFactory {
     const checksumDigit = suffix.substring(hashLength, hashLength + 1);
     const hash = suffix.substring(0, hashLength);
     if (checksumDigit !== this.checksumDigit(hash, checksum)) {
-      throw new Error(`Malformed oid: ${shortcode}_${suffix}`);
+      throw new InvalidCheckdigitError(`Malformed oid: ${shortcode}_${suffix}`);
     }
     return hash;
   }
   unwrap(oid: Oid): { scope: string; id: string | number } {
     const matches = ScopeRegistry.hashIdRegEx.exec(oid.oid);
     if (!matches || (matches && matches.length !== 3)) {
-      throw new Error(`Malformed oid format: ${oid.oid}`);
+      throw new MalformedOidError(`Malformed oid format: ${oid.oid}`);
     }
     const [, shortcode, suffix] = matches;
     const scope = ScopeRegistry.getScopename(shortcode);

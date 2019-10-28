@@ -1,6 +1,8 @@
 import { OidFactory } from './implementations/oid-factory.interface';
 export declare class Oid {
     oid: string;
+    id: string | number;
+    scope: string;
     private factory;
     private static readonly registry;
     valueOf(): string;

@@ -1,6 +1,10 @@
 import { Oid } from '../../src/oid';
 /**
- * Scenario: ensure that all old, Alpha-created OIDs can be operated on
+ * The initial release of Alpha generated Oids née Hashids that were of min_length 4,
+ *   with a checkdigit and unique salt.
+ *
+ * Here we test that we can consume extant ones as new Oids, and that we the future does
+ *   not cause problems as the underlying database_ids result in longer encoded Oids.
  */
 describe.each([
   ['PurchaseOrder', 'po', 1, 'po_781nx'],

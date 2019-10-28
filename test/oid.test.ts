@@ -1,3 +1,4 @@
+import { ScopeRegistrationError, UnregisteredScopeError } from './../src/errors/index';
 import 'reflect-metadata';
 import { ScopeTypes } from '../src/implementations/types';
 import { Oid } from '../src';
@@ -41,7 +42,9 @@ describe('Scenario: registering Oids', () => {
         });
         describe('When: registering the same scope, NEW shortcode', () => {
           test('Then: an error is thrown', () => {
-            expect(() => Oid.RegisterScope(ExperimentalScope, 'newshortcode')).toThrow();
+            expect(() => Oid.RegisterScope(ExperimentalScope, 'newshortcode')).toThrow(
+              ScopeRegistrationError
+            );
           });
         });
       });
@@ -82,9 +85,16 @@ describe('Scenario: registering Oids', () => {
           test('Then: an error is thrown', () => {
             expect(() => {
               Oid.create(UnregisteredScope, 2);
-            }).toThrow();
+            }).toThrow(UnregisteredScopeError);
           });
         });
+      });
+    });
+  });
+  describe('Feature: Oids must be registered with a shortcode', () => {
+    describe('When: registering a new scope with no shortcode', () => {
+      test('Then: an error is thrown', () => {
+        expect(() => Oid.RegisterScope('FooBarBazQuux')).toThrow(ScopeRegistrationError);
       });
     });
   });
@@ -130,7 +140,7 @@ describe('Given: a `shortcode` that does not match to a registered Scope', () =>
     const oid_string = `${shortcode}_barbaz`;
     describe('When: instantiating an Oid with the `oid_string`', () => {
       test('Then: an error is thrown', () => {
-        expect(() => new Oid(oid_string)).toThrow();
+        expect(() => new Oid(oid_string)).toThrow(UnregisteredScopeError);
       });
     });
   });

@@ -1,3 +1,4 @@
+import { ScopeRegistrationError, UnregisteredScopeError } from './../errors/index';
 import * as xxhash from 'xxhash';
 import { ScopeTypes } from './types';
 import { Scopes, NoCheckdigitArbiterScopes, AlphaHashidScopes, TildeScopeNames } from './scopes';
@@ -30,7 +31,7 @@ export class ScopeRegistry {
   static getScopename(key: string | number): string {
     const scopename = this.registeredByKey.get(key);
     if (!scopename) {
-      throw new Error(`key ${key} is not registered`);
+      throw new UnregisteredScopeError(`key ${key} is not registered`);
     }
     return scopename;
   }
@@ -38,7 +39,7 @@ export class ScopeRegistry {
   static getKey(scopename: string): string | number {
     const key = this.registeredByScopename.get(scopename);
     if (!key) {
-      throw new Error(`scope ${scopename} not registered`);
+      throw new UnregisteredScopeError(`scope ${scopename} not registered`);
     }
     return key;
   }
@@ -47,7 +48,7 @@ export class ScopeRegistry {
     const registeredKey = ScopeRegistry.registeredByScopename.get(scopename);
 
     if (registeredKey && shortcode && registeredKey !== shortcode) {
-      throw new Error(
+      throw new ScopeRegistrationError(
         `Cannot reregister Scope:${scopename} has already been registered under shortcode:${shortcode}`
       );
     }
@@ -55,7 +56,7 @@ export class ScopeRegistry {
       case ScopeTypes.EXPERIMENTAL:
       case ScopeTypes.CHECKDIGIT:
         if (!shortcode) {
-          throw new Error('Oids must declare their shortcode');
+          throw new ScopeRegistrationError('Oids must declare their shortcode');
         }
         ScopeRegistry.registeredByScopename.set(scopename, shortcode);
         ScopeRegistry.registeredByKey.set(shortcode, scopename);

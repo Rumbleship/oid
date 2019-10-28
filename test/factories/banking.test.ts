@@ -1,4 +1,4 @@
-import { Oid } from './../../src/oid';
+import { Oid } from '../../src/oid';
 describe('Scenario: creating Tilde Oids', () => {
   describe('Given: a BankAccount scope has been registered', () => {
     beforeAll(() => {
