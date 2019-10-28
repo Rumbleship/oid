@@ -5,7 +5,7 @@ export declare class Oid {
     private scope;
     private factory;
     private static readonly registry;
-    static RegisterScope(scope: string, shortcode?: string): import("./implementations/scope").Scope;
+    static RegisterScope(scope: string, shortcode?: string): import("./implementations/scope-registry").Scope;
     static UnregisterScopes(): void;
     static GetFactoryByScopename(scopename: string): OidFactory;
     static GetFactoryByEncoded(external_oid: string): OidFactory;

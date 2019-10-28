@@ -1,8 +1,7 @@
-import { CheckdigitScopes } from './scopes';
+import { CheckdigitScopes } from './scopes.enum';
 import { CheckdigitOidFactory, AlphaHashidScopes, NoCheckdigitArbiterScopes } from './checkdigit';
 import { TildeOidFactory, TildeScopeNames } from './tilde';
 import { OidFactory } from './oid-factory.interface';
-
 const checkdigitFactory = new CheckdigitOidFactory();
 const tildeFactory = new TildeOidFactory();
 export const OidFactoryMapByScope: Map<string, OidFactory> = new Map<string, OidFactory>();

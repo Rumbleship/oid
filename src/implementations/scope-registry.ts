@@ -6,8 +6,10 @@ import {
   NoCheckdigitArbiterScopes,
   AlphaHashidScopes,
   TildeScopeNames
-} from './scopes';
-import { Scope } from './scope';
+} from './scopes.enum';
+export class Scope {
+  constructor(public key: string | number, public name: string) {}
+}
 
 export class ScopeRegistry {
   static ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';

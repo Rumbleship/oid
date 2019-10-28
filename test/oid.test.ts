@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { ScopeRegistrationError, UnregisteredScopeError } from './../src/errors/index';
 import { ScopeTypes } from '../src/implementations/types';
+import { Scope } from '../src/implementations/scope-registry';
 import { Oid } from '../src';
-import { Scope } from './implementations/scope';
 
 describe('Scenario: registering Oids', () => {
   describe('Feature: An Oid that is not registered globally can be registered', () => {
