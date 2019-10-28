@@ -7,6 +7,12 @@ export declare class Oid {
     static RegisterScope(scope: string, shortcode?: string): Scope;
     static UnregisterScopes(): void;
     static Create(scopename: string, id: string | number): Oid;
+    /**
+     * @deprecated in favor of `Oid.Create()`
+     * @param scopename
+     * @param id
+     */
+    static create(scopename: string, id: string | number): Oid;
     constructor(oid: string);
     unwrap(): {
         id: string | number;
