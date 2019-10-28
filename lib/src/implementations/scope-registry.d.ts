@@ -1,18 +1,24 @@
+import { OidFactory } from './oid-factory.interface';
 import { ScopeTypes } from './types';
 export declare class Scope {
     key: string | number;
     name: string;
-    constructor(key: string | number, name: string);
+    type: ScopeTypes;
+    constructor(key: string | number, name: string, type: ScopeTypes);
 }
-export declare class ScopeRegistry {
-    static ALPHABET: string;
-    static readonly hashIdRegEx: RegExp;
-    private static registeredByKey;
-    private static registeredByScopename;
-    static GetScopeType(scopename: string): ScopeTypes;
-    static GetScopename(key: string | number): string;
-    static GetKey(scopename: string): string | number;
+declare class ScopeRegistry {
+    private readonly hashIdRegEx;
+    private registeredByKey;
+    private registeredByScopename;
+    private scopeKeyToFactoryMap;
+    getScopeType(scopename: string): ScopeTypes;
+    getScopename(key: string | number): string;
+    getKey(scopename: string): string | number;
+    constructor();
+    getFactoryByScopename(scopename: string): OidFactory;
+    getFactoryByOidString(oid_string: string): OidFactory;
     register(scopename: string, shortcode?: string): Scope;
     resetRegistery(): void;
 }
 export declare const scopeRegistry: ScopeRegistry;
+export {};

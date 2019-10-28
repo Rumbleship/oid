@@ -4,10 +4,10 @@ import Hashids from 'hashids';
 
 import { AlphaHashidScopes, NoCheckdigitArbiterScopes } from './historical.scopes';
 import { OidFactory } from '../oid-factory.interface';
-import { ScopeRegistry } from '../scope-registry';
 import { Oid } from '../../oid';
 
 export class CheckdigitOidFactory implements OidFactory {
+  private readonly ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
   static GetHashidOidOptions(scopename: string) {
     if (Reflect.get(NoCheckdigitArbiterScopes, scopename)) {
       return {
@@ -58,24 +58,26 @@ export class CheckdigitOidFactory implements OidFactory {
     };
   }
 
+  constructor(private registry: any) {}
+
   checksumDigit(oid_suffix: string, checksum: number = 0) {
     const coefficients = [1, 5, 7];
     const chars = oid_suffix.split('');
     const sum =
       chars.reduce((acc, c, i) => {
         const coefficient = coefficients[i % 3];
-        acc += ScopeRegistry.ALPHABET.indexOf(c) * coefficient;
+        acc += this.ALPHABET.indexOf(c) * coefficient;
         return acc;
       }, 0) + checksum;
-    const checksumIndex = ScopeRegistry.ALPHABET.length - 1 - (sum % ScopeRegistry.ALPHABET.length);
-    return ScopeRegistry.ALPHABET.charAt(checksumIndex);
+    const checksumIndex = this.ALPHABET.length - 1 - (sum % this.ALPHABET.length);
+    return this.ALPHABET.charAt(checksumIndex);
   }
   create(scopename: string, id: string | number) {
     if (typeof id !== 'number') {
       throw new MalformedOidError('A Hashid Oid must be created with a db_id type:number');
     }
     const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
-    const shortcode = ScopeRegistry.GetKey(scopename);
+    const shortcode = this.registry.getKey(scopename);
     const suffix = this.getEncoder(scopename).encode(id);
     const check_digit = this.checksumDigit(suffix, checksum);
     return new Oid(`${shortcode}_${suffix}${check_digit}`);
@@ -96,12 +98,12 @@ export class CheckdigitOidFactory implements OidFactory {
     return hash;
   }
   unwrap(oid: Oid): { scope: string; id: string | number } {
-    const matches = ScopeRegistry.hashIdRegEx.exec(oid.oid);
+    const matches = this.registry.hashIdRegEx.exec(oid.oid);
     if (!matches || (matches && matches.length !== 3)) {
       throw new MalformedOidError(`Malformed oid format: ${oid.oid}`);
     }
     const [, shortcode, suffix] = matches;
-    const scope = ScopeRegistry.GetScopename(shortcode);
+    const scope = this.registry.getScopename(shortcode);
     const hashed = this.verifyAndStripCheckDigit(scope, shortcode, suffix);
     const id = this.getEncoder(scope).decode(hashed)[0];
     return { id, scope };
@@ -109,7 +111,6 @@ export class CheckdigitOidFactory implements OidFactory {
 
   getEncoder(scopename: string) {
     const { salt, length } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
-    // if the scopename is in the alpha scopes, length must be 4 for backward compatibility; else 5
-    return new Hashids(salt, length, ScopeRegistry.ALPHABET);
+    return new Hashids(salt, length, this.ALPHABET);
   }
 }
