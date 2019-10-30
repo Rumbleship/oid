@@ -11,6 +11,7 @@ import { Oid } from './oid';
  */
 export const Registry = Object.freeze({
   [BankingScopeNames.AchGateway]: Oid.RegisterScope(BankingScopeNames.AchGateway),
+  [BankingScopeNames.Batch]: Oid.RegisterScope(BankingScopeNames.Batch),
   [NoCheckdigitArbiterScopes.Activity]: Oid.RegisterScope('Activity', 'act'),
   [BankingScopeNames.BankAccount]: Oid.RegisterScope(BankingScopeNames.BankAccount),
   [BankingScopeNames.BankTransaction]: Oid.RegisterScope(BankingScopeNames.BankTransaction),
@@ -20,6 +21,7 @@ export const Registry = Object.freeze({
   ),
   [AlphaHashidScopes.Buyer]: Oid.RegisterScope(AlphaHashidScopes.Buyer, 'b'),
   [CheckdigitScopes.Company]: Oid.RegisterScope(CheckdigitScopes.Company, 'co'),
+  [CheckdigitScopes.PlaidItem]: Oid.RegisterScope(CheckdigitScopes.PlaidItem, 'pitem'),
   [NoCheckdigitArbiterScopes.ExternalEvent]: Oid.RegisterScope(
     NoCheckdigitArbiterScopes.ExternalEvent,
     'ee'

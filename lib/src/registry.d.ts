@@ -4,12 +4,14 @@ import { AlphaHashidScopes, NoCheckdigitArbiterScopes, BankingScopeNames, Checkd
  */
 export declare const Registry: Readonly<{
     [BankingScopeNames.AchGateway]: import("./implementations/scope-registry").Scope;
+    [BankingScopeNames.Batch]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.Activity]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.BankAccount]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.BankTransaction]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.BusinessApplication]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.Buyer]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.Company]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.PlaidItem]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.ExternalEvent]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.OrderReference]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.PaymentRequest]: import("./implementations/scope-registry").Scope;
