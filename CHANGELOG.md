@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
   * Backwards compatible lower-case Oid.create`
+  * Missing scopes; `Batch` and `PlaidItem`
 ### Removed
 ### Changed
 ### Fixed
