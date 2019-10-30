@@ -23,7 +23,7 @@ Inside any given service, an externally safe Oid can be created by simply callin
 ```typescript
 const scope = 'Workflow';
 const database_id = 1;
-const oid_string: string = Oid.create(scope, workflow);
+const oid_string: string = Oid.create(scope, database_id);
 // > console.log(oid_string);
 // `wf_ovjeyo`
 ```

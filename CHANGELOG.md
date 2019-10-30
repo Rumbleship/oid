@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [UNRELEASED]
 
 ### Added
-  * Backwards compatible lower-case Oid.create`
   * Missing scopes; `Batch` and `PlaidItem`
 ### Removed
 ### Changed
@@ -16,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Security
 
+
+## [1.0.1] -- 2019-10-28
+
+### Added
+  * Backwards compatible lower-case Oid.create`
 
 ## [1.0.0] -- 2019-10-28
 
