@@ -9,8 +9,6 @@ import { Oid } from '../../src/oid';
 describe.each([
   ['PurchaseOrder', 'po', 1, 'po_781nx'],
   ['Shipment', 'shp', 1, 'shp_jdxri'],
-  ['Buyer', 'b', 1, 'b_ngdn2'],
-  ['Supplier', 's', 2, 's_2yon0'],
   ['User', 'u', 1, 'u_76ykw']
 ])(
   'Given: a `%s` scope has been registered with shortcode `%s`',

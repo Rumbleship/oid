@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 ### Removed
 ### Changed
+  * **BREAKING CHANGE** Moved `Buyer` and `Supplier` out of `AlphaHashidScopes` and into plain `CheckdigitScopes`
 ### Fixed
 ### Deprecated
 ### Security

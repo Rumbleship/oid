@@ -19,7 +19,7 @@ export const Registry = Object.freeze({
     NoCheckdigitArbiterScopes.BusinessApplication,
     'be'
   ),
-  [AlphaHashidScopes.Buyer]: Oid.RegisterScope(AlphaHashidScopes.Buyer, 'b'),
+  [CheckdigitScopes.Buyer]: Oid.RegisterScope(CheckdigitScopes.Buyer, 'b'),
   [CheckdigitScopes.Company]: Oid.RegisterScope(CheckdigitScopes.Company, 'co'),
   [CheckdigitScopes.PlaidItem]: Oid.RegisterScope(CheckdigitScopes.PlaidItem, 'pitem'),
   [NoCheckdigitArbiterScopes.ExternalEvent]: Oid.RegisterScope(
@@ -30,7 +30,7 @@ export const Registry = Object.freeze({
   [BankingScopeNames.PaymentRequest]: Oid.RegisterScope(BankingScopeNames.PaymentRequest),
   [AlphaHashidScopes.PurchaseOrder]: Oid.RegisterScope(AlphaHashidScopes.PurchaseOrder, 'po'),
   [AlphaHashidScopes.Shipment]: Oid.RegisterScope(AlphaHashidScopes.Shipment, 'shp'),
-  [AlphaHashidScopes.Supplier]: Oid.RegisterScope(AlphaHashidScopes.Supplier, 's'),
+  [CheckdigitScopes.Supplier]: Oid.RegisterScope(CheckdigitScopes.Supplier, 's'),
   [AlphaHashidScopes.User]: Oid.RegisterScope(AlphaHashidScopes.User, 'u'),
   [NoCheckdigitArbiterScopes.Workflow]: Oid.RegisterScope(NoCheckdigitArbiterScopes.Workflow, 'wf')
 });
