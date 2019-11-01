@@ -18,18 +18,6 @@ export class CheckdigitOidFactory implements OidFactory {
     }
     if (Reflect.get(AlphaHashidScopes, scopename)) {
       switch (scopename) {
-        case AlphaHashidScopes.Buyer:
-          return {
-            length: 4,
-            checksum: 2,
-            salt: 'Division'
-          };
-        case AlphaHashidScopes.Supplier:
-          return {
-            length: 4,
-            checksum: 2,
-            salt: 'Division'
-          };
         case AlphaHashidScopes.User:
           return {
             length: 4,
