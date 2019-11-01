@@ -9,7 +9,7 @@ export declare const Registry: Readonly<{
     [BankingScopeNames.BankAccount]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.BankTransaction]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.BusinessApplication]: import("./implementations/scope-registry").Scope;
-    [AlphaHashidScopes.Buyer]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.Buyer]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.Company]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.PlaidItem]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.ExternalEvent]: import("./implementations/scope-registry").Scope;
@@ -17,7 +17,7 @@ export declare const Registry: Readonly<{
     [BankingScopeNames.PaymentRequest]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.PurchaseOrder]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.Shipment]: import("./implementations/scope-registry").Scope;
-    [AlphaHashidScopes.Supplier]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.Supplier]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.User]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.Workflow]: import("./implementations/scope-registry").Scope;
 }>;
