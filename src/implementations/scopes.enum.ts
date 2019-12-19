@@ -5,5 +5,7 @@ export enum CheckdigitScopes {
   Buyer = 'Buyer',
   Company = 'Company',
   PlaidItem = 'PlaidItem',
-  Supplier = 'Supplier'
+  Supplier = 'Supplier',
+  DivisionRelationship = 'DivisionRelationship',
+  TermsChoice = 'TermsChoice'
 }
