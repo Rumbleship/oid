@@ -20,4 +20,6 @@ export declare const Registry: Readonly<{
     [CheckdigitScopes.Supplier]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.User]: import("./implementations/scope-registry").Scope;
     [NoCheckdigitArbiterScopes.Workflow]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.DivisionRelationship]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.TermsChoice]: import("./implementations/scope-registry").Scope;
 }>;
