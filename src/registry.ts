@@ -37,5 +37,21 @@ export const Registry = Object.freeze({
     CheckdigitScopes.DivisionRelationship,
     'bsr'
   ),
-  [CheckdigitScopes.TermsChoice]: Oid.RegisterScope(CheckdigitScopes.TermsChoice, 'tc')
+  [CheckdigitScopes.TermsChoice]: Oid.RegisterScope(CheckdigitScopes.TermsChoice, 'tc'),
+  [CheckdigitScopes.ShopifyCredential]: Oid.RegisterScope(
+    CheckdigitScopes.ShopifyCredential,
+    'shopifycred'
+  ),
+  [CheckdigitScopes.WoocommerceCredential]: Oid.RegisterScope(
+    CheckdigitScopes.WoocommerceCredential,
+    'wccred'
+  ),
+  [CheckdigitScopes.BigcommerceCredential]: Oid.RegisterScope(
+    CheckdigitScopes.BigcommerceCredential,
+    'bccred'
+  ),
+  [CheckdigitScopes.TradegeckoCredential]: Oid.RegisterScope(
+    CheckdigitScopes.TradegeckoCredential,
+    'tgcred'
+  )
 });

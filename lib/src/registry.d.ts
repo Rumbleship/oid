@@ -22,4 +22,8 @@ export declare const Registry: Readonly<{
     [NoCheckdigitArbiterScopes.Workflow]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.DivisionRelationship]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.TermsChoice]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.ShopifyCredential]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.WoocommerceCredential]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.BigcommerceCredential]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.TradegeckoCredential]: import("./implementations/scope-registry").Scope;
 }>;
