@@ -7,5 +7,9 @@ export enum CheckdigitScopes {
   PlaidItem = 'PlaidItem',
   Supplier = 'Supplier',
   DivisionRelationship = 'DivisionRelationship',
-  TermsChoice = 'TermsChoice'
+  TermsChoice = 'TermsChoice',
+  ShopifyCredential = 'ShopifyCredential',
+  WoocommerceCredential = 'WoocommerceCredential',
+  BigcommerceCredential = 'BigcommerceCredential',
+  TradegeckoCredential = 'TradegeckoCredential'
 }

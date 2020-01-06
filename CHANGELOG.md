@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [UNRELEASED]
 
 ### Added
+  * New Scopes for Credentials in Mediator:
+    * ShopifyCredential
+    * WoocommerceCredential
+    * BigcommerceCredential
+    * TradegeckoCredential
 ### Removed
 ### Changed
 ### Fixed
