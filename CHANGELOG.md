@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 ### Removed
 ### Changed
+  * Removed `approve_for_publish` step from master:build
 ### Fixed
 ### Deprecated
 ### Security
