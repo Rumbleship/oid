@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
     * ExternalEvent(ee_) scope
     * BusinessApplication (be_) scope
   * Removed  enum NoCheckdigitArbiterScopes, as fully deprecated
+  * Removed tests for the NoCheckdigitArbiterScopes
 ### Changed
   * for Arbiter 
     * changed Workflow (wf_) scope to CheckDigitScope
