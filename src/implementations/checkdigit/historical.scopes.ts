@@ -4,10 +4,4 @@ export enum AlphaHashidScopes {
   Shipment = 'Shipment',
   User = 'User'
 }
-// scopes that were registered in the first version of Arbiter; they do not have checkdigits
-export enum NoCheckdigitArbiterScopes {
-  Workflow = 'Workflow',
-  Activity = 'Activity',
-  BusinessApplication = 'BusinessApplication',
-  ExternalEvent = 'ExternalEvent'
-}
+
