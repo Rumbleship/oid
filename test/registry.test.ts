@@ -3,12 +3,10 @@ import { Registry } from './../src/registry';
 import {
   CheckdigitScopes,
   AlphaHashidScopes,
-  BankingScopeNames,
-  NoCheckdigitArbiterScopes
+  BankingScopeNames
 } from '../src/implementations/scopes.enum';
 const all_scopes_names = [
   ...Object.keys(AlphaHashidScopes),
-  ...Object.keys(NoCheckdigitArbiterScopes),
   ...Object.keys(BankingScopeNames),
   ...Object.keys(CheckdigitScopes)
 ];

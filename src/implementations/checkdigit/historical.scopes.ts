@@ -4,4 +4,3 @@ export enum AlphaHashidScopes {
   Shipment = 'Shipment',
   User = 'User'
 }
-

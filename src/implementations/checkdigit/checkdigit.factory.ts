@@ -2,20 +2,13 @@ import { InvalidCheckdigitError } from './../../errors/index';
 import { MalformedOidError } from '../../errors';
 import Hashids from 'hashids';
 
-import { AlphaHashidScopes, NoCheckdigitArbiterScopes } from './historical.scopes';
+import { AlphaHashidScopes } from './historical.scopes';
 import { OidFactory } from '../oid-factory.interface';
 import { Oid } from '../../oid';
 
 export class CheckdigitOidFactory implements OidFactory {
   private readonly ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
   static GetHashidOidOptions(scopename: string) {
-    if (Reflect.get(NoCheckdigitArbiterScopes, scopename)) {
-      return {
-        length: 5,
-        checksum: 3,
-        salt: 'rfi_oid'
-      };
-    }
     if (Reflect.get(AlphaHashidScopes, scopename)) {
       switch (scopename) {
         case AlphaHashidScopes.User:
@@ -72,11 +65,8 @@ export class CheckdigitOidFactory implements OidFactory {
   }
 
   verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string {
-    const { checksum, length } = CheckdigitOidFactory.GetHashidOidOptions(scope);
-    if (Reflect.get(NoCheckdigitArbiterScopes, scope) && suffix.length === length) {
-      // We've consumed an Arbiter hashid that was created without a check digit
-      return suffix;
-    }
+    const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scope);
+
     const hashLength = suffix.length - 1;
     const checksumDigit = suffix.substring(hashLength, hashLength + 1);
     const hash = suffix.substring(0, hashLength);

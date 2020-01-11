@@ -10,5 +10,10 @@ export declare enum CheckdigitScopes {
     ShopifyCredential = "ShopifyCredential",
     WoocommerceCredential = "WoocommerceCredential",
     BigcommerceCredential = "BigcommerceCredential",
-    TradegeckoCredential = "TradegeckoCredential"
+    TradegeckoCredential = "TradegeckoCredential",
+    Workflow = "Workflow",
+    AuditEntry = "AuditEntry",
+    DisposedEvent = "DisposedEvent",
+    PendingEvent = "PendingEvent",
+    BuyerApplication = "BuyerApplication"
 }
