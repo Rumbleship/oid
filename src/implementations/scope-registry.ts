@@ -8,12 +8,7 @@ import {
   MalformedOidError
 } from './../errors/index';
 import { ScopeTypes } from './types';
-import {
-  CheckdigitScopes,
-  NoCheckdigitArbiterScopes,
-  AlphaHashidScopes,
-  BankingScopeNames
-} from './scopes.enum';
+import { CheckdigitScopes, AlphaHashidScopes, BankingScopeNames } from './scopes.enum';
 import { fromBase64 } from '../util';
 export class Scope {
   constructor(public key: string | number, public name: string, public type: ScopeTypes) {}
@@ -26,11 +21,7 @@ class ScopeRegistry {
   private scopeKeyToFactoryMap: Map<string, OidFactory> = new Map<string, OidFactory>();
 
   getScopeType(scopename: string): ScopeTypes {
-    if (
-      Reflect.get(AlphaHashidScopes, scopename) ||
-      Reflect.get(NoCheckdigitArbiterScopes, scopename) ||
-      Reflect.get(CheckdigitScopes, scopename)
-    ) {
+    if (Reflect.get(AlphaHashidScopes, scopename) || Reflect.get(CheckdigitScopes, scopename)) {
       return ScopeTypes.CHECKDIGIT;
     }
 

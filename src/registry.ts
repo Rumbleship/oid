@@ -1,6 +1,5 @@
 import {
   AlphaHashidScopes,
-  NoCheckdigitArbiterScopes,
   BankingScopeNames,
   CheckdigitScopes
 } from './implementations/scopes.enum';
@@ -12,27 +11,18 @@ import { Oid } from './oid';
 export const Registry = Object.freeze({
   [BankingScopeNames.AchGateway]: Oid.RegisterScope(BankingScopeNames.AchGateway),
   [BankingScopeNames.Batch]: Oid.RegisterScope(BankingScopeNames.Batch),
-  [NoCheckdigitArbiterScopes.Activity]: Oid.RegisterScope('Activity', 'act'),
   [BankingScopeNames.BankAccount]: Oid.RegisterScope(BankingScopeNames.BankAccount),
   [BankingScopeNames.BankTransaction]: Oid.RegisterScope(BankingScopeNames.BankTransaction),
-  [NoCheckdigitArbiterScopes.BusinessApplication]: Oid.RegisterScope(
-    NoCheckdigitArbiterScopes.BusinessApplication,
-    'be'
-  ),
+
   [CheckdigitScopes.Buyer]: Oid.RegisterScope(CheckdigitScopes.Buyer, 'b'),
   [CheckdigitScopes.Company]: Oid.RegisterScope(CheckdigitScopes.Company, 'co'),
   [CheckdigitScopes.PlaidItem]: Oid.RegisterScope(CheckdigitScopes.PlaidItem, 'pitem'),
-  [NoCheckdigitArbiterScopes.ExternalEvent]: Oid.RegisterScope(
-    NoCheckdigitArbiterScopes.ExternalEvent,
-    'ee'
-  ),
   [BankingScopeNames.OrderReference]: Oid.RegisterScope(BankingScopeNames.OrderReference),
   [BankingScopeNames.PaymentRequest]: Oid.RegisterScope(BankingScopeNames.PaymentRequest),
   [AlphaHashidScopes.PurchaseOrder]: Oid.RegisterScope(AlphaHashidScopes.PurchaseOrder, 'po'),
   [AlphaHashidScopes.Shipment]: Oid.RegisterScope(AlphaHashidScopes.Shipment, 'shp'),
   [CheckdigitScopes.Supplier]: Oid.RegisterScope(CheckdigitScopes.Supplier, 's'),
   [AlphaHashidScopes.User]: Oid.RegisterScope(AlphaHashidScopes.User, 'u'),
-  [NoCheckdigitArbiterScopes.Workflow]: Oid.RegisterScope(NoCheckdigitArbiterScopes.Workflow, 'wf'),
   [CheckdigitScopes.DivisionRelationship]: Oid.RegisterScope(
     CheckdigitScopes.DivisionRelationship,
     'bsr'
@@ -53,5 +43,10 @@ export const Registry = Object.freeze({
   [CheckdigitScopes.TradegeckoCredential]: Oid.RegisterScope(
     CheckdigitScopes.TradegeckoCredential,
     'tgcred'
-  )
+  ),
+  [CheckdigitScopes.AuditEntry]: Oid.RegisterScope(CheckdigitScopes.AuditEntry, 'ae'),
+  [CheckdigitScopes.BuyerApplication]: Oid.RegisterScope(CheckdigitScopes.BuyerApplication, 'ba'),
+  [CheckdigitScopes.DisposedEvent]: Oid.RegisterScope(CheckdigitScopes.DisposedEvent, 'de'),
+  [CheckdigitScopes.PendingEvent]: Oid.RegisterScope(CheckdigitScopes.PendingEvent, 'pe'),
+  [CheckdigitScopes.Workflow]: Oid.RegisterScope(CheckdigitScopes.Workflow, 'wf')
 });
