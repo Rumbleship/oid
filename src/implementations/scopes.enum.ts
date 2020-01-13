@@ -11,5 +11,12 @@ export enum CheckdigitScopes {
   ShopifyCredential = 'ShopifyCredential',
   WoocommerceCredential = 'WoocommerceCredential',
   BigcommerceCredential = 'BigcommerceCredential',
-  TradegeckoCredential = 'TradegeckoCredential'
+  TradegeckoCredential = 'TradegeckoCredential',
+  // Arbiter - choreographer
+  Workflow = 'Workflow',
+  AuditEntry = 'AuditEntry',
+  DisposedEvent = 'DisposedEvent',
+  PendingEvent = 'PendingEvent',
+  // Arbiter - BuyerOnboarding
+  BuyerApplication = 'BuyerApplication'
 }

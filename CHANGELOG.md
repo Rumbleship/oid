@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file. Starting wi
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [UNRELEASED]
+
+### Added
+  * for Arbiter
+    * BusinessApplication (ba_) scope as a CheckDigitScope
+    * PendingEvent (pe_) scope as a CheckDigitScope
+    * DisposedEvent (de_) scope as a CheckDigitScope
+    * AuditEntry (ae_)  scope as a CheckDigitScope
+### Removed
+  * for Arbiter
+    * Activity (act_) scope
+    * ExternalEvent(ee_) scope
+    * BusinessApplication (be_) scope
+  * Removed  enum NoCheckdigitArbiterScopes, as fully deprecated
+  * Removed tests for the NoCheckdigitArbiterScopes
+### Changed
+  * for Arbiter 
+    * changed Workflow (wf_) scope to CheckDigitScope
+  * Removed `approve_for_publish` step from master:build
+### Fixed
+### Deprecated
+### Security
+
+
 ## [2.0.2] -- 2020-01-07
 
 ### Added
