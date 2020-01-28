@@ -4,7 +4,7 @@
   "authors": [
     "Isaac Sparling <isaac@rumbleship.com"
   ],
-  "main": "lib/src/index.js",
+  "main": "lib/index.js",
   "description": "Global registry of Rumbleship OIDs",
   "license": "UNLICENSED",
   "private": true,
