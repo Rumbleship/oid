@@ -1,16 +1,18 @@
+import { OidFactory2 } from './../oid-factory.interface';
+import { Oid, ScopeName, ServiceName, Registry2, Shortcode, Scope } from './../../oid';
 import { InvalidCheckdigitError } from './../../errors/index';
 import { MalformedOidError } from '../../errors';
 import Hashids from 'hashids';
 
 import { AlphaHashidScopes } from './historical.scopes';
-import { OidFactory } from '../oid-factory.interface';
-import { Oid } from '../../oid';
+// import { OidFactory } from '../oid-factory.interface';
 
-export class CheckdigitOidFactory implements OidFactory {
+export class CheckdigitOidFactory implements OidFactory2 {
   private readonly ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  static GetHashidOidOptions(scopename: string) {
-    if (Reflect.get(AlphaHashidScopes, scopename)) {
-      switch (scopename) {
+  static GetHashidOidOptions(scope: Scope) {
+    const scopename = scope.name.toString();
+    if (Reflect.get(AlphaHashidScopes, scopename.toString())) {
+      switch (scopename.toString()) {
         case AlphaHashidScopes.User:
           return {
             length: 4,
@@ -39,7 +41,7 @@ export class CheckdigitOidFactory implements OidFactory {
     };
   }
 
-  constructor(private registry: any) {}
+  constructor(private registry: Registry2) {}
 
   checksumDigit(oid_suffix: string, checksum: number = 0) {
     const coefficients = [1, 5, 7];
@@ -53,18 +55,20 @@ export class CheckdigitOidFactory implements OidFactory {
     const checksumIndex = this.ALPHABET.length - 1 - (sum % this.ALPHABET.length);
     return this.ALPHABET.charAt(checksumIndex);
   }
-  create(scopename: string, id: string | number) {
+  create(scopename: ScopeName, id: string | number, service: ServiceName) {
     if (typeof id !== 'number') {
       throw new MalformedOidError('A Hashid Oid must be created with a db_id type:number');
     }
-    const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
-    const shortcode = this.registry.getKey(scopename);
-    const suffix = this.getEncoder(scopename).encode(id);
+    const scope = this.registry.getScope(scopename);
+    const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scope);
+    const shortcode = scope.shortcode.toString();
+    const suffix = this.getEncoder(scope).encode(id);
     const check_digit = this.checksumDigit(suffix, checksum);
-    return new Oid(`${shortcode}_${suffix}${check_digit}`);
+    return new Oid(`${shortcode}.${service}_${suffix}${check_digit}`);
   }
 
-  verifyAndStripCheckDigit(scope: string, shortcode: string, suffix: string): string {
+  verifyAndStripCheckDigit(scope: Scope, suffix: string): string {
+    const { shortcode } = scope;
     const { checksum } = CheckdigitOidFactory.GetHashidOidOptions(scope);
 
     const hashLength = suffix.length - 1;
@@ -75,20 +79,20 @@ export class CheckdigitOidFactory implements OidFactory {
     }
     return hash;
   }
-  unwrap(oid: Oid): { scope: string; id: string | number } {
+  unwrap(oid: Oid): { scope: string; id: string | number; service: string } {
     const matches = this.registry.hashIdRegEx.exec(oid.oid);
     if (!matches || (matches && matches.length !== 3)) {
       throw new MalformedOidError(`Malformed oid format: ${oid.oid}`);
     }
     const [, shortcode, suffix] = matches;
-    const scope = this.registry.getScopename(shortcode);
-    const hashed = this.verifyAndStripCheckDigit(scope, shortcode, suffix);
+    const scope = this.registry.getScope(new Shortcode(shortcode));
+    const hashed = this.verifyAndStripCheckDigit(scope, suffix);
     const id = this.getEncoder(scope).decode(hashed)[0];
-    return { id, scope };
+    return { id, scope: scope.name.toString(), service: 'foo' };
   }
 
-  getEncoder(scopename: string) {
-    const { salt, length } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
+  getEncoder(scope: Scope) {
+    const { salt, length } = CheckdigitOidFactory.GetHashidOidOptions(scope);
     return new Hashids(salt, length, this.ALPHABET);
   }
 }

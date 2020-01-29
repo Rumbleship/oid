@@ -1,2 +1,2 @@
 export * from './oid';
-export * from './registry';
+// export * from './registry';
