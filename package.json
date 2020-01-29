@@ -18,9 +18,9 @@
     "coverage": "NODE_PATH=. tsc -p . && NODE_PATH=. jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "devDependencies": {
+    "@types/hashids": "^1.0.30",
     "@types/jest": "^24.0.6",
     "@types/node": "^12.0.4",
-    "@types/hashids": "^1.0.30",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^24.1.0",
     "coveralls": "^3.0.3",
