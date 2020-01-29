@@ -1,3 +1,122 @@
+import * as xxhash from 'xxhash';
+import { OidFactory2 } from './oid-factory.interface';
+import { MalformedOidError, ScopeRegistrationError, UnregisteredScopeError } from '../errors/index';
+import { BankingOidFactory } from './banking/banking.factory';
+import { CheckdigitOidFactory } from './checkdigit/checkdigit.factory';
+import { fromBase64 } from './../util';
+
+abstract class Name {
+  constructor(private name: string) {}
+  toString() {
+    return this.name;
+  }
+}
+export class ServiceName extends Name {
+  static FromExternal(shortcodeAndservice: string) {
+    const [, service] =
+      shortcodeAndservice.indexOf('.') > -1
+        ? shortcodeAndservice.split('.')
+        : [undefined, 'DEFAULT_SERVICE_NAME'];
+    return new this(service);
+  }
+}
+export class Shortcode extends Name {
+  static FromExternal(shortcodeAndService: string) {
+    const [shortcode] =
+      shortcodeAndService.indexOf('.') > -1
+        ? shortcodeAndService.split('.')
+        : [shortcodeAndService];
+    return new this(shortcode);
+  }
+}
+export class ScopeName extends Name {}
+
+export class Scope {
+  constructor(
+    public readonly name: ScopeName,
+    public readonly shortcode: string,
+    public readonly service: ServiceName
+  ) {
+    if (this.service.toString() === 'banking') {
+      this.shortcode = xxhash.hash(Buffer.from(shortcode), 0xcafecafe);
+    }
+  }
+  toString() {
+    return `${this.name}.${this.service}`;
+  }
+}
+
+export class Registry2 {
+  private shortcodeToScope = new Map<string, Scope>();
+  private nameToScope = new Map<string, Scope>();
+  private scopes = new Map<string, Scope>();
+  public readonly hashIdRegEx = /^(.+)_([a-z0-9]+)/;
+
+  getFactoryByOidString(oid_string: string): OidFactory2 {
+    if (oid_string[0] === `~`) {
+      return new BankingOidFactory(this);
+    }
+    const matches = this.hashIdRegEx.exec(oid_string);
+    if (!matches || (matches && matches.length !== 3)) {
+      try {
+        // try to parse the encoded json...
+        JSON.parse(fromBase64(oid_string));
+        return new BankingOidFactory(this);
+      } catch (e) {
+        throw new MalformedOidError(`Malformed tilde oid format: ${oid_string}`);
+      }
+    }
+
+    return new CheckdigitOidFactory(this);
+  }
+
+  getMapFor(val: ScopeName | Shortcode) {
+    if (val instanceof Shortcode) {
+      return this.shortcodeToScope;
+    }
+    if (val instanceof ScopeName) {
+      return this.nameToScope;
+    }
+    throw new Error('invalid lookup');
+  }
+  register(name: string, shortcode: string, service: string): Scope {
+    if (shortcode === '~') {
+      shortcode = xxhash.hash(Buffer.from(name), 0xcafecafe);
+    }
+    const scope = new Scope(new ScopeName(name), shortcode, new ServiceName(service));
+    if (this.scopes.has(scope.toString())) {
+      if (this.scopes.get(scope.toString())?.shortcode !== shortcode) {
+        throw new ScopeRegistrationError(
+          `Name+Service already registered to shortcode: ${shortcode}`
+        );
+      }
+    }
+    this.scopes.set(scope.toString(), scope);
+    this.shortcodeToScope.set(shortcode, scope);
+    this.nameToScope.set(name, scope);
+    return scope;
+  }
+
+  getScope(name: ScopeName | Shortcode): Scope {
+    const scope = this.getMapFor(name).get(name.toString());
+    if (!scope) {
+      throw new UnregisteredScopeError(`Unregistered Scope: ${name}`);
+    }
+    return scope;
+  }
+
+  getFactoryFor(scope: Scope) {
+    if (scope.service.toString() === 'banking') {
+      return new BankingOidFactory(this);
+    }
+    return new CheckdigitOidFactory(this);
+  }
+  resetRegistery() {
+    this.shortcodeToScope = new Map<string, Scope>();
+    this.nameToScope = new Map<string, Scope>();
+    this.scopes = new Map<string, Scope>();
+  }
+}
 // import { BankingOidFactory } from './banking/banking.factory';
 // import { OidFactory } from './oid-factory.interface';
 // import { CheckdigitOidFactory } from './checkdigit/checkdigit.factory';

@@ -1,5 +1,10 @@
 # Rumbleship Oids
 
+
+## WIP
+  * Trying to incorporate the service name into the oid itself, so `wf.banking_812398` identified as belonging to a difference service from `wf.onboarding_1293012`
+  * Must still accept the old `wf_123921` which implicitly is for onboarding. 
+  
 ## Why Oid
 We use oids for several reasons: 
 1. Exposing identifiers that are clearly prefixed with what they identify is immensely helpful for us as developers.

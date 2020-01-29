@@ -1,114 +1,4 @@
-import * as xxhash from 'xxhash';
-import { OidFactory2 } from './implementations/oid-factory.interface';
-import { MalformedOidError, ScopeRegistrationError } from './errors/index';
-import { BankingOidFactory } from './implementations/banking/banking.factory';
-import { CheckdigitOidFactory } from './implementations/checkdigit/checkdigit.factory';
-// import { scopeRegistry, Scope } from './implementations/scope-registry';
-import { fromBase64 } from './util';
-
-abstract class Name {
-  constructor(private name: string) {}
-  toString() {
-    return this.name;
-  }
-}
-export class ServiceName extends Name {
-  constructor(name: string) {
-    const [, service] = name.indexOf('.') > -1 ? name.split('.') : 'DEFAULT_SERVICE_NAME';
-    super(service);
-  }
-}
-export class Shortcode extends Name {
-  constructor(name: string) {
-    const [shortcode] = name.indexOf('.') > -1 ? name.split('.') : name;
-    super(shortcode);
-  }
-}
-export class ScopeName extends Name {}
-
-export class Scope {
-  constructor(
-    public readonly name: ScopeName,
-    public readonly shortcode: string,
-    public readonly service: ServiceName
-  ) {
-    if (this.service.toString() === 'banking') {
-      this.shortcode = xxhash.hash(Buffer.from(shortcode), 0xcafecafe);
-    }
-  }
-  toString() {
-    return `${this.name}.${this.service}`;
-  }
-}
-
-export class Registry2 {
-  private shortcodeToScope = new Map<string, Scope>();
-  private nameToScope = new Map<string, Scope>();
-  private scopes = new Map<string, Scope>();
-  public readonly hashIdRegEx = /^(.+)_([a-z0-9]+)/;
-
-  getFactoryByOidString(oid_string: string): OidFactory2 {
-    if (oid_string[0] === `~`) {
-      return new BankingOidFactory(this);
-    }
-    const matches = this.hashIdRegEx.exec(oid_string);
-    if (!matches || (matches && matches.length !== 3)) {
-      try {
-        // try to parse the encoded json...
-        JSON.parse(fromBase64(oid_string));
-        return new BankingOidFactory(this);
-      } catch (e) {
-        throw new MalformedOidError(`Malformed tilde oid format: ${oid_string}`);
-      }
-    }
-
-    return new CheckdigitOidFactory(this);
-  }
-
-  getMapFor(val: ScopeName | Shortcode) {
-    if (val instanceof Shortcode) {
-      return this.shortcodeToScope;
-    }
-    if (val instanceof ScopeName) {
-      return this.nameToScope;
-    }
-    throw new Error('invalid lookup');
-  }
-  register(name: string, shortcode: string, service: string): Scope {
-    const scope = new Scope(new ScopeName(name), shortcode, new ServiceName(service));
-    if (this.scopes.has(scope.toString())) {
-      if (this.scopes.get(scope.toString())?.shortcode !== shortcode) {
-        throw new ScopeRegistrationError(
-          `Name+Service already registered to shortcode: ${shortcode}`
-        );
-      }
-    }
-    this.scopes.set(scope.toString(), scope);
-    this.shortcodeToScope.set(shortcode, scope);
-    this.nameToScope.set(name, scope);
-    return scope;
-  }
-
-  getScope(name: ScopeName | Shortcode): Scope {
-    const scope = this.getMapFor(name).get(name.toString());
-    if (!scope) {
-      throw new Error(`Unregistered Scope: ${name}`);
-    }
-    return scope;
-  }
-
-  getFactoryFor(scope: Scope) {
-    if (scope.service.toString() === 'banking') {
-      return new BankingOidFactory(this);
-    }
-    return new CheckdigitOidFactory(this);
-  }
-  resetRegistery() {
-    this.shortcodeToScope = new Map<string, Scope>();
-    this.nameToScope = new Map<string, Scope>();
-    this.scopes = new Map<string, Scope>();
-  }
-}
+import { Registry2, ScopeName, ServiceName } from './implementations/scope-registry';
 
 const scopeRegistry = new Registry2();
 
@@ -116,6 +6,7 @@ export class Oid {
   private id: string | number;
   private scope: string;
   private service: string;
+  private deprecated: string;
 
   static registry = scopeRegistry;
 
@@ -133,10 +24,11 @@ export class Oid {
   }
   constructor(public oid: string) {
     const factory = Oid.registry.getFactoryByOidString(oid);
-    const { id, scope, service } = factory.unwrap(this);
+    const { id, scope, suffix } = factory.unwrap(this);
     this.id = id;
-    this.scope = scope;
-    this.service = service;
+    this.scope = scope.name.toString();
+    this.service = scope.service.toString();
+    this.deprecated = `${scope.shortcode}_${suffix}`;
   }
   unwrap(): { id: string | number; scope: string; service: string } {
     return { id: this.id, scope: this.scope, service: this.service };
@@ -148,6 +40,11 @@ export class Oid {
 
   toString(): string {
     return this.oid;
+  }
+
+  getDeprecatedFormat(): string {
+    console.warn('DEPRECATED FORMAT');
+    return this.deprecated;
   }
 }
 

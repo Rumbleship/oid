@@ -1,5 +1,6 @@
+import { Oid } from './../../oid';
 import { OidFactory2 } from './../oid-factory.interface';
-import { Oid, ScopeName, ServiceName, Registry2, Shortcode, Scope } from './../../oid';
+import { ScopeName, ServiceName, Registry2, Shortcode, Scope } from './../scope-registry';
 import { InvalidCheckdigitError } from './../../errors/index';
 import { MalformedOidError } from '../../errors';
 import Hashids from 'hashids';
@@ -79,16 +80,20 @@ export class CheckdigitOidFactory implements OidFactory2 {
     }
     return hash;
   }
-  unwrap(oid: Oid): { scope: string; id: string | number; service: string } {
+  unwrap(oid: Oid): { scope: Scope; id: number; suffix: string } {
     const matches = this.registry.hashIdRegEx.exec(oid.oid);
     if (!matches || (matches && matches.length !== 3)) {
       throw new MalformedOidError(`Malformed oid format: ${oid.oid}`);
     }
     const [, shortcode, suffix] = matches;
-    const scope = this.registry.getScope(new Shortcode(shortcode));
+    const scope = this.registry.getScope(Shortcode.FromExternal(shortcode));
     const hashed = this.verifyAndStripCheckDigit(scope, suffix);
     const id = this.getEncoder(scope).decode(hashed)[0];
-    return { id, scope: scope.name.toString(), service: 'foo' };
+    return {
+      id,
+      scope,
+      suffix
+    };
   }
 
   getEncoder(scope: Scope) {
