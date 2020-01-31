@@ -10,6 +10,7 @@ export declare const Registry: Readonly<{
     [CheckdigitScopes.Buyer]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.Company]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.PlaidItem]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.BalanceCheck]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.OrderReference]: import("./implementations/scope-registry").Scope;
     [BankingScopeNames.PaymentRequest]: import("./implementations/scope-registry").Scope;
     [AlphaHashidScopes.PurchaseOrder]: import("./implementations/scope-registry").Scope;
