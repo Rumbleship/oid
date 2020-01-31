@@ -17,6 +17,7 @@ export const Registry = Object.freeze({
   [CheckdigitScopes.Buyer]: Oid.RegisterScope(CheckdigitScopes.Buyer, 'b'),
   [CheckdigitScopes.Company]: Oid.RegisterScope(CheckdigitScopes.Company, 'co'),
   [CheckdigitScopes.PlaidItem]: Oid.RegisterScope(CheckdigitScopes.PlaidItem, 'pitem'),
+  [CheckdigitScopes.BalanceCheck]: Oid.RegisterScope(CheckdigitScopes.BalanceCheck, 'bal'),
   [BankingScopeNames.OrderReference]: Oid.RegisterScope(BankingScopeNames.OrderReference),
   [BankingScopeNames.PaymentRequest]: Oid.RegisterScope(BankingScopeNames.PaymentRequest),
   [AlphaHashidScopes.PurchaseOrder]: Oid.RegisterScope(AlphaHashidScopes.PurchaseOrder, 'po'),
