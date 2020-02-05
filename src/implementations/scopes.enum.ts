@@ -19,5 +19,7 @@ export enum CheckdigitScopes {
   DisposedEvent = 'DisposedEvent',
   PendingEvent = 'PendingEvent',
   // Arbiter - BuyerOnboarding
-  BuyerApplication = 'BuyerApplication'
+  BuyerApplication = 'BuyerApplication',
+  // Arbiter -- RunAchFile
+  AchFile = 'AchFile'
 }
