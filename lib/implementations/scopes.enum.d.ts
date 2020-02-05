@@ -16,5 +16,6 @@ export declare enum CheckdigitScopes {
     AuditEntry = "AuditEntry",
     DisposedEvent = "DisposedEvent",
     PendingEvent = "PendingEvent",
-    BuyerApplication = "BuyerApplication"
+    BuyerApplication = "BuyerApplication",
+    AchFile = "AchFile"
 }
