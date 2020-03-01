@@ -29,4 +29,10 @@ export declare const Registry: Readonly<{
     [CheckdigitScopes.DisposedEvent]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.PendingEvent]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.Workflow]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.NewAchGateway]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.NewBankAccount]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.NewBankTransaction]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.NewBatch]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.NewOrderReference]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.NewPaymentRequest]: import("./implementations/scope-registry").Scope;
 }>;

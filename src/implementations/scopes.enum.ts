@@ -21,5 +21,11 @@ export enum CheckdigitScopes {
   // Arbiter - BuyerOnboarding
   BuyerApplication = 'BuyerApplication',
   // Arbiter -- RunAchFile
-  AchFile = 'AchFile'
+  AchFile = 'AchFile',
+  NewAchGateway = 'NewAchGateway',
+  NewBankAccount = 'NewBankAccount',
+  NewBankTransaction = 'NewBankTransaction',
+  NewBatch = 'NewBatch',
+  NewOrderReference = 'NewOrderReference',
+  NewPaymentRequest = 'NewPaymentRequest'
 }

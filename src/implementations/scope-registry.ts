@@ -28,7 +28,6 @@ class ScopeRegistry {
     if (Reflect.get(BankingScopeNames, scopename)) {
       return ScopeTypes.BANKING;
     }
-
     return ScopeTypes.EXPERIMENTAL;
   }
 

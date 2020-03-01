@@ -17,5 +17,11 @@ export declare enum CheckdigitScopes {
     DisposedEvent = "DisposedEvent",
     PendingEvent = "PendingEvent",
     BuyerApplication = "BuyerApplication",
-    AchFile = "AchFile"
+    AchFile = "AchFile",
+    NewAchGateway = "NewAchGateway",
+    NewBankAccount = "NewBankAccount",
+    NewBankTransaction = "NewBankTransaction",
+    NewBatch = "NewBatch",
+    NewOrderReference = "NewOrderReference",
+    NewPaymentRequest = "NewPaymentRequest"
 }

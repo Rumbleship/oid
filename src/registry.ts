@@ -50,5 +50,14 @@ export const Registry = Object.freeze({
   [CheckdigitScopes.BuyerApplication]: Oid.RegisterScope(CheckdigitScopes.BuyerApplication, 'ba'),
   [CheckdigitScopes.DisposedEvent]: Oid.RegisterScope(CheckdigitScopes.DisposedEvent, 'de'),
   [CheckdigitScopes.PendingEvent]: Oid.RegisterScope(CheckdigitScopes.PendingEvent, 'pe'),
-  [CheckdigitScopes.Workflow]: Oid.RegisterScope(CheckdigitScopes.Workflow, 'wf')
+  [CheckdigitScopes.Workflow]: Oid.RegisterScope(CheckdigitScopes.Workflow, 'wf'),
+  [CheckdigitScopes.NewAchGateway]: Oid.RegisterScope(CheckdigitScopes.NewAchGateway, 'gate'),
+  [CheckdigitScopes.NewBankAccount]: Oid.RegisterScope(CheckdigitScopes.NewBankAccount, 'ba'),
+  [CheckdigitScopes.NewBankTransaction]: Oid.RegisterScope(
+    CheckdigitScopes.NewBankTransaction,
+    'bt'
+  ),
+  [CheckdigitScopes.NewBatch]: Oid.RegisterScope(CheckdigitScopes.NewBatch, 'bat'),
+  [CheckdigitScopes.NewOrderReference]: Oid.RegisterScope(CheckdigitScopes.NewOrderReference, 'or'),
+  [CheckdigitScopes.NewPaymentRequest]: Oid.RegisterScope(CheckdigitScopes.NewPaymentRequest, 'pr')
 });
