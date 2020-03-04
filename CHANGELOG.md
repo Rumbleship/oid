@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
   * `AchFile` oid; shortcode: `ach_`
   * Checkdigits Scopes for new migrating Banking
-    * All are prefixed with `New` to let current set of `~`-prefixed scopes to continue to work
 ### Removed
+  * Tilde Oids
 ### Changed
 ### Fixed
 ### Deprecated

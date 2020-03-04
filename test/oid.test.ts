@@ -49,26 +49,6 @@ describe('Scenario: registering Oids', () => {
           });
         });
       });
-      describe('When: registering a scope for BankAccounts, of type known to be TILDE', () => {
-        let scope: Scope;
-        beforeAll(() => {
-          scope = Oid.RegisterScope('BankAccount');
-        });
-        test('Then: a Scope that wraps a stable numeric hash key is returned', () => {
-          expect(scope).toBeInstanceOf(Scope);
-          expect(scope.key).toMatchInlineSnapshot('2979548881');
-        });
-        describe('When: re-registering the same scope', () => {
-          let scope2: Scope;
-          beforeAll(() => {
-            scope2 = Oid.RegisterScope('BankAccount');
-          });
-          test('Then: a Scope that wraps a stable numeric hash key is returned', () => {
-            expect(scope2).toBeInstanceOf(Scope);
-            expect(scope2.key).toMatchInlineSnapshot('2979548881');
-          });
-        });
-      });
       describe.each([['PurchaseOrder', 'po', ScopeTypes.CHECKDIGIT]])(
         'When: registering a scope for %s, of type %s',
         (scope, shortcode, scopeType) => {

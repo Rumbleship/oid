@@ -1,5 +1,4 @@
 export * from './checkdigit/historical.scopes';
-export * from './banking/banking.scopes';
 
 export enum CheckdigitScopes {
   Buyer = 'Buyer',
@@ -22,10 +21,11 @@ export enum CheckdigitScopes {
   BuyerApplication = 'BuyerApplication',
   // Arbiter -- RunAchFile
   AchFile = 'AchFile',
-  NewAchGateway = 'NewAchGateway',
-  NewBankAccount = 'NewBankAccount',
-  NewBankTransaction = 'NewBankTransaction',
-  NewBatch = 'NewBatch',
-  NewOrderReference = 'NewOrderReference',
-  NewPaymentRequest = 'NewPaymentRequest'
+  // Banking -- transitioned from old ~oids
+  AchGateway = 'AchGateway',
+  BankAccount = 'BankAccount',
+  BankTransaction = 'BankTransaction',
+  Batch = 'Batch',
+  OrderReference = 'OrderReference',
+  PaymentRequest = 'PaymentRequest'
 }

@@ -1,26 +1,15 @@
-import {
-  AlphaHashidScopes,
-  BankingScopeNames,
-  CheckdigitScopes
-} from './implementations/scopes.enum';
+import { AlphaHashidScopes, CheckdigitScopes } from './implementations/scopes.enum';
 import { Oid } from './oid';
 
 /**
  * To add a new scope, declare it as in the CheckdigitScopes enum, and then its shortcode here.
  */
 export const Registry = Object.freeze({
-  [BankingScopeNames.AchGateway]: Oid.RegisterScope(BankingScopeNames.AchGateway),
-  [BankingScopeNames.Batch]: Oid.RegisterScope(BankingScopeNames.Batch),
-  [BankingScopeNames.BankAccount]: Oid.RegisterScope(BankingScopeNames.BankAccount),
-  [BankingScopeNames.BankTransaction]: Oid.RegisterScope(BankingScopeNames.BankTransaction),
-
   [CheckdigitScopes.Buyer]: Oid.RegisterScope(CheckdigitScopes.Buyer, 'b'),
   [CheckdigitScopes.Company]: Oid.RegisterScope(CheckdigitScopes.Company, 'co'),
   [CheckdigitScopes.PlaidItem]: Oid.RegisterScope(CheckdigitScopes.PlaidItem, 'pitem'),
   [CheckdigitScopes.BalanceCheck]: Oid.RegisterScope(CheckdigitScopes.BalanceCheck, 'bal'),
   [CheckdigitScopes.AchFile]: Oid.RegisterScope(CheckdigitScopes.AchFile, 'ach'),
-  [BankingScopeNames.OrderReference]: Oid.RegisterScope(BankingScopeNames.OrderReference),
-  [BankingScopeNames.PaymentRequest]: Oid.RegisterScope(BankingScopeNames.PaymentRequest),
   [AlphaHashidScopes.PurchaseOrder]: Oid.RegisterScope(AlphaHashidScopes.PurchaseOrder, 'po'),
   [AlphaHashidScopes.Shipment]: Oid.RegisterScope(AlphaHashidScopes.Shipment, 'shp'),
   [CheckdigitScopes.Supplier]: Oid.RegisterScope(CheckdigitScopes.Supplier, 's'),
@@ -51,13 +40,10 @@ export const Registry = Object.freeze({
   [CheckdigitScopes.DisposedEvent]: Oid.RegisterScope(CheckdigitScopes.DisposedEvent, 'de'),
   [CheckdigitScopes.PendingEvent]: Oid.RegisterScope(CheckdigitScopes.PendingEvent, 'pe'),
   [CheckdigitScopes.Workflow]: Oid.RegisterScope(CheckdigitScopes.Workflow, 'wf'),
-  [CheckdigitScopes.NewAchGateway]: Oid.RegisterScope(CheckdigitScopes.NewAchGateway, 'gate'),
-  [CheckdigitScopes.NewBankAccount]: Oid.RegisterScope(CheckdigitScopes.NewBankAccount, 'ba'),
-  [CheckdigitScopes.NewBankTransaction]: Oid.RegisterScope(
-    CheckdigitScopes.NewBankTransaction,
-    'bt'
-  ),
-  [CheckdigitScopes.NewBatch]: Oid.RegisterScope(CheckdigitScopes.NewBatch, 'bat'),
-  [CheckdigitScopes.NewOrderReference]: Oid.RegisterScope(CheckdigitScopes.NewOrderReference, 'or'),
-  [CheckdigitScopes.NewPaymentRequest]: Oid.RegisterScope(CheckdigitScopes.NewPaymentRequest, 'pr')
+  [CheckdigitScopes.AchGateway]: Oid.RegisterScope(CheckdigitScopes.AchGateway, 'gate'),
+  [CheckdigitScopes.BankAccount]: Oid.RegisterScope(CheckdigitScopes.BankAccount, 'ba'),
+  [CheckdigitScopes.BankTransaction]: Oid.RegisterScope(CheckdigitScopes.BankTransaction, 'bt'),
+  [CheckdigitScopes.Batch]: Oid.RegisterScope(CheckdigitScopes.Batch, 'bat'),
+  [CheckdigitScopes.OrderReference]: Oid.RegisterScope(CheckdigitScopes.OrderReference, 'or'),
+  [CheckdigitScopes.PaymentRequest]: Oid.RegisterScope(CheckdigitScopes.PaymentRequest, 'pr')
 });
