@@ -1,14 +1,12 @@
-import { BankingOidFactory } from './banking/banking.factory';
 import { OidFactory } from './oid-factory.interface';
 import { CheckdigitOidFactory } from './checkdigit/checkdigit.factory';
-import * as xxhash from 'xxhash';
 import {
   ScopeRegistrationError,
   UnregisteredScopeError,
   MalformedOidError
 } from './../errors/index';
 import { ScopeTypes } from './types';
-import { CheckdigitScopes, AlphaHashidScopes, BankingScopeNames } from './scopes.enum';
+import { CheckdigitScopes, AlphaHashidScopes } from './scopes.enum';
 import { fromBase64 } from '../util';
 export class Scope {
   constructor(public key: string | number, public name: string, public type: ScopeTypes) {}
@@ -23,10 +21,6 @@ class ScopeRegistry {
   getScopeType(scopename: string): ScopeTypes {
     if (Reflect.get(AlphaHashidScopes, scopename) || Reflect.get(CheckdigitScopes, scopename)) {
       return ScopeTypes.CHECKDIGIT;
-    }
-
-    if (Reflect.get(BankingScopeNames, scopename)) {
-      return ScopeTypes.BANKING;
     }
 
     return ScopeTypes.EXPERIMENTAL;
@@ -54,8 +48,6 @@ class ScopeRegistry {
   getFactoryByScopename(scopename: string): OidFactory {
     const type = this.getScopeType(scopename);
     switch (type) {
-      case ScopeTypes.BANKING:
-        return new BankingOidFactory(this);
       case ScopeTypes.EXPERIMENTAL:
       case ScopeTypes.CHECKDIGIT:
         return new CheckdigitOidFactory(this);
@@ -63,9 +55,6 @@ class ScopeRegistry {
   }
 
   getFactoryByOidString(oid_string: string): OidFactory {
-    if (oid_string[0] === `~`) {
-      return new BankingOidFactory(this);
-    }
     const matches = this.hashIdRegEx.exec(oid_string);
     if (!matches || (matches && matches.length !== 3)) {
       try {
@@ -105,12 +94,6 @@ class ScopeRegistry {
         this.registeredByKey.set(shortcode, scopename);
         this.scopeKeyToFactoryMap.set(shortcode, new CheckdigitOidFactory(this));
         return new Scope(shortcode, scopename, type);
-      case ScopeTypes.BANKING:
-        const key = xxhash.hash(Buffer.from(scopename), 0xcafecafe);
-        this.registeredByScopename.set(scopename, key);
-        this.registeredByKey.set(key, scopename);
-        this.scopeKeyToFactoryMap.set(key, new BankingOidFactory(this));
-        return new Scope(key, scopename, type);
     }
   }
 

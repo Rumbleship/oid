@@ -1,5 +1,4 @@
 export * from './checkdigit/historical.scopes';
-export * from './banking/banking.scopes';
 export declare enum CheckdigitScopes {
     Buyer = "Buyer",
     Company = "Company",
@@ -17,5 +16,11 @@ export declare enum CheckdigitScopes {
     DisposedEvent = "DisposedEvent",
     PendingEvent = "PendingEvent",
     BuyerApplication = "BuyerApplication",
-    AchFile = "AchFile"
+    AchFile = "AchFile",
+    AchGateway = "AchGateway",
+    BankAccount = "BankAccount",
+    BankTransaction = "BankTransaction",
+    Batch = "Batch",
+    OrderReference = "OrderReference",
+    PaymentRequest = "PaymentRequest"
 }
