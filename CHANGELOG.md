@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [UNRELEASED]
 
 ### Added
-  * `AchFile` oid; shortcode: `ach_`
-  * Checkdigits Scopes for new migrating Banking
 ### Removed
   * Tilde Oids
 ### Changed
@@ -18,6 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Deprecated
 ### Security
 
+
+## [3.0.3] -- 2020-02-05
+
+### Added
+  * `AchFile` oid; shortcode: `ach_`
 
 ## [3.0.2] -- 2020-01-31
 
