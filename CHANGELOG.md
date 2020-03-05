@@ -9,7 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Removed
+  * Tilde Oids
 ### Changed
+  * All Banking Oids are now checkdigits:
+    * `AchGateway` --> `gate_`
+    * `BankAccount` --> `ba_`
+    * `BankTransaction` --> `bt_`
+    * `Batch` --> `bat_`
+    * `OrderReference` --> `or_`
+    * `PaymentRequest` --> `pr_`
+  * `BuyerApplication` shortcode: `bap_`
 ### Fixed
 ### Deprecated
 ### Security

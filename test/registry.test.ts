@@ -1,15 +1,7 @@
 import 'reflect-metadata';
 import { Registry } from './../src/registry';
-import {
-  CheckdigitScopes,
-  AlphaHashidScopes,
-  BankingScopeNames
-} from '../src/implementations/scopes.enum';
-const all_scopes_names = [
-  ...Object.keys(AlphaHashidScopes),
-  ...Object.keys(BankingScopeNames),
-  ...Object.keys(CheckdigitScopes)
-];
+import { CheckdigitScopes, AlphaHashidScopes } from '../src/implementations/scopes.enum';
+const all_scopes_names = [...Object.keys(AlphaHashidScopes), ...Object.keys(CheckdigitScopes)];
 
 test.each(all_scopes_names)('Declared scope %s is registered', declared_scope => {
   expect(Reflect.get(Registry, declared_scope)).toBeTruthy();
