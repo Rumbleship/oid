@@ -36,7 +36,7 @@ export const Registry = Object.freeze({
     'tgcred'
   ),
   [CheckdigitScopes.AuditEntry]: Oid.RegisterScope(CheckdigitScopes.AuditEntry, 'ae'),
-  [CheckdigitScopes.BuyerApplication]: Oid.RegisterScope(CheckdigitScopes.BuyerApplication, 'ba'),
+  [CheckdigitScopes.BuyerApplication]: Oid.RegisterScope(CheckdigitScopes.BuyerApplication, 'bap'),
   [CheckdigitScopes.DisposedEvent]: Oid.RegisterScope(CheckdigitScopes.DisposedEvent, 'de'),
   [CheckdigitScopes.PendingEvent]: Oid.RegisterScope(CheckdigitScopes.PendingEvent, 'pe'),
   [CheckdigitScopes.Workflow]: Oid.RegisterScope(CheckdigitScopes.Workflow, 'wf'),
