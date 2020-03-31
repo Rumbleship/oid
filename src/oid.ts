@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-circular-imports
 import { scopeRegistry, Scope } from './implementations/scope-registry';
 
 export class Oid {
