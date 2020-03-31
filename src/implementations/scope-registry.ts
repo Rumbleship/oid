@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-circular-imports
 import { OidFactory } from './oid-factory.interface';
 import { CheckdigitOidFactory } from './checkdigit/checkdigit.factory';
 import {
