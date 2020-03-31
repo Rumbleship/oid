@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 ### Removed
+  * module declaration for `xxhash`
 ### Changed
   * Updated tslint.json, tsconfig.json, plugins, etc to support nullish coalescing.
 ### Fixed
