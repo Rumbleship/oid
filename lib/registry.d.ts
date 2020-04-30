@@ -29,4 +29,5 @@ export declare const Registry: Readonly<{
     Batch: import("./implementations/scope-registry").Scope;
     OrderReference: import("./implementations/scope-registry").Scope;
     PaymentRequest: import("./implementations/scope-registry").Scope;
+    PlaidWebhook: import("./implementations/scope-registry").Scope;
 }>;
