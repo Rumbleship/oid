@@ -22,5 +22,6 @@ export declare enum CheckdigitScopes {
     BankTransaction = "BankTransaction",
     Batch = "Batch",
     OrderReference = "OrderReference",
-    PaymentRequest = "PaymentRequest"
+    PaymentRequest = "PaymentRequest",
+    PlaidWebhook = "PlaidWebhook"
 }
