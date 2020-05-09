@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [UNRELEASED]
 
-### Added
+### Added 
+  * `PlaidTransaction` oid; shortcode: `ptxn_`
 ### Removed
 ### Changed
 ### Fixed
