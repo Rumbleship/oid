@@ -23,5 +23,6 @@ export declare enum CheckdigitScopes {
     Batch = "Batch",
     OrderReference = "OrderReference",
     PaymentRequest = "PaymentRequest",
-    PlaidWebhook = "PlaidWebhook"
+    PlaidWebhook = "PlaidWebhook",
+    PlaidTransaction = "PlaidTransaction"
 }
