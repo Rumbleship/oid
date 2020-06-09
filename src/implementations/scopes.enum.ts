@@ -1,6 +1,7 @@
 export * from './checkdigit/historical.scopes';
 
 export enum CheckdigitScopes {
+  ApiKey = 'ApiKey',
   Buyer = 'Buyer',
   Company = 'Company',
   PlaidItem = 'PlaidItem',
