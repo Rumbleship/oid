@@ -29,6 +29,8 @@ export enum CheckdigitScopes {
   Batch = 'Batch',
   OrderReference = 'OrderReference',
   PaymentRequest = 'PaymentRequest',
+  PlaidIdentity = 'PlaidIdentity',
+  PlaidIdentityEntry = 'PlaidIdentityEntry',
   PlaidWebhook = 'PlaidWebhook',
   PlaidTransaction = 'PlaidTransaction'
 }

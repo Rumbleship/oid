@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [UNRELEASED]
 
 ### Added
+* `PlaidIdentity` oid; shortcode: `pident`
+* `PlaidIdentityEntry` oid; shortcode: `pidentry`
 ### Removed
 ### Changed
 ### Fixed
