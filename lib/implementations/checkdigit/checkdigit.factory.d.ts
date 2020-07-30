@@ -1,3 +1,4 @@
+import Hashids from 'hashids';
 import { OidFactory } from '../oid-factory.interface';
 import { Oid } from '../../oid';
 export declare class CheckdigitOidFactory implements OidFactory {
@@ -16,5 +17,5 @@ export declare class CheckdigitOidFactory implements OidFactory {
         scope: string;
         id: string | number;
     };
-    getEncoder(scopename: string): any;
+    getEncoder(scopename: string): Hashids;
 }
