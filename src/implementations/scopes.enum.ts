@@ -33,5 +33,4 @@ export enum CheckdigitScopes {
   PlaidIdentityEntry = 'PlaidIdentityEntry',
   PlaidWebhook = 'PlaidWebhook',
   PlaidTransaction = 'PlaidTransaction'
-  
 }
