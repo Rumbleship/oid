@@ -50,5 +50,8 @@ export const Registry = Object.freeze({
   [CheckdigitScopes.PlaidTransaction]: Oid.RegisterScope(CheckdigitScopes.PlaidTransaction, 'ptxn'),
   [CheckdigitScopes.ApiKey]: Oid.RegisterScope(CheckdigitScopes.ApiKey, 'key'),
   [CheckdigitScopes.PlaidIdentity]: Oid.RegisterScope(CheckdigitScopes.PlaidIdentity, 'pident'),
-  [CheckdigitScopes.PlaidIdentityEntry]: Oid.RegisterScope(CheckdigitScopes.PlaidIdentityEntry, 'pidentry')
+  [CheckdigitScopes.PlaidIdentityEntry]: Oid.RegisterScope(
+    CheckdigitScopes.PlaidIdentityEntry,
+    'pidentry'
+  )
 });
