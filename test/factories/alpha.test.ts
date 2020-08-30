@@ -35,8 +35,8 @@ describe.each([
 
 describe('Given: six-digit oid_string that corresponds to a historical alpha Oid', () => {
   const scope = 'PurchaseOrder';
-  const oid_string: string = 'po_v6vlza';
-  const database_id: number = 100000;
+  const oid_string = 'po_v6vlza';
+  const database_id = 100000;
   Oid.RegisterScope('PurchaseOrder', 'po');
   describe('When: creating an Oid from (Scope|database_id)', () => {
     let oid: Oid;

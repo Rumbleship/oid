@@ -1,5 +1,6 @@
-// tslint:disable-next-line: no-circular-imports
+// eslint-disable-next-line import/no-cycle
 import { OidFactory } from './oid-factory.interface';
+// eslint-disable-next-line import/no-cycle
 import { CheckdigitOidFactory } from './checkdigit/checkdigit.factory';
 import {
   ScopeRegistrationError,
@@ -13,8 +14,8 @@ export class Scope {
   constructor(public key: string | number, public name: string, public type: ScopeTypes) {}
 }
 
-class ScopeRegistry {
-  private readonly hashIdRegEx = /^(.+)_([a-z0-9]+)/;
+export class ScopeRegistry {
+  public readonly hashIdRegEx = /^(.+)_([a-z0-9]+)/;
   private registeredByKey: Map<string | number, string> = new Map<string | number, string>();
   private registeredByScopename: Map<string, string | number> = new Map<string, string | number>();
   private scopeKeyToFactoryMap: Map<string, OidFactory> = new Map<string, OidFactory>();
@@ -43,7 +44,7 @@ class ScopeRegistry {
     return key;
   }
 
-  // tslint:disable-next-line: no-empty
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   getFactoryByScopename(scopename: string): OidFactory {
@@ -98,7 +99,7 @@ class ScopeRegistry {
     }
   }
 
-  resetRegistery() {
+  resetRegistery(): void {
     this.registeredByKey = new Map<string | number, string>();
     this.registeredByScopename = new Map<string, string | number>();
   }

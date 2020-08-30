@@ -1,4 +1,4 @@
-// tslint:disable-next-line: no-circular-imports
+// eslint-disable-next-line import/no-cycle
 import { Oid } from '../oid';
 import Hashids from 'hashids';
 

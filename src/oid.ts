@@ -1,4 +1,4 @@
-// tslint:disable-next-line: no-circular-imports
+// eslint-disable-next-line import/no-cycle
 import { scopeRegistry, Scope } from './implementations/scope-registry';
 
 export class Oid {
@@ -9,10 +9,10 @@ export class Oid {
   static RegisterScope(scope: string, shortcode?: string): Scope {
     return Oid.registry.register(scope, shortcode);
   }
-  static UnregisterScopes() {
+  static UnregisterScopes(): void {
     Oid.registry.resetRegistery();
   }
-  static Create(scopename: string, id: string | number) {
+  static Create(scopename: string, id: string | number): Oid {
     const factory = Oid.registry.getFactoryByScopename(scopename);
     const oid = factory.create(scopename, id);
     return oid;
@@ -22,7 +22,7 @@ export class Oid {
    * @param scopename
    * @param id
    */
-  static create(scopename: string, id: string | number) {
+  static create(scopename: string, id: string | number): Oid {
     return this.Create(scopename, id);
   }
   constructor(public oid: string) {
