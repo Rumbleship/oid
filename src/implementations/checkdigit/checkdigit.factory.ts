@@ -1,14 +1,24 @@
-import { InvalidCheckdigitError } from './../../errors/index';
-import { MalformedOidError } from '../../errors';
+import { InvalidCheckdigitError, MalformedOidError } from './../../errors/index';
+
 import Hashids from 'hashids';
 
 import { AlphaHashidScopes } from './historical.scopes';
+// eslint-disable-next-line import/no-cycle
 import { OidFactory } from '../oid-factory.interface';
+// eslint-disable-next-line import/no-cycle
 import { Oid } from '../../oid';
+// eslint-disable-next-line import/no-cycle
+import { ScopeRegistry } from './../scope-registry';
 
 export class CheckdigitOidFactory implements OidFactory {
   private readonly ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  static GetHashidOidOptions(scopename: string) {
+  static GetHashidOidOptions(
+    scopename: string
+  ): {
+    length: number;
+    checksum: number;
+    salt: string;
+  } {
     if (Reflect.get(AlphaHashidScopes, scopename)) {
       switch (scopename) {
         case AlphaHashidScopes.User:
@@ -39,9 +49,9 @@ export class CheckdigitOidFactory implements OidFactory {
     };
   }
 
-  constructor(private registry: any) {}
+  constructor(private registry: ScopeRegistry) {}
 
-  checksumDigit(oid_suffix: string, checksum: number = 0) {
+  checksumDigit(oid_suffix: string, checksum = 0): string {
     const coefficients = [1, 5, 7];
     const chars = oid_suffix.split('');
     const sum =
@@ -53,7 +63,7 @@ export class CheckdigitOidFactory implements OidFactory {
     const checksumIndex = this.ALPHABET.length - 1 - (sum % this.ALPHABET.length);
     return this.ALPHABET.charAt(checksumIndex);
   }
-  create(scopename: string, id: string | number) {
+  create(scopename: string, id: string | number): Oid {
     if (typeof id !== 'number') {
       throw new MalformedOidError('A Hashid Oid must be created with a db_id type:number');
     }
@@ -87,7 +97,7 @@ export class CheckdigitOidFactory implements OidFactory {
     return { id, scope };
   }
 
-  getEncoder(scopename: string) {
+  getEncoder(scopename: string): Hashids {
     const { salt, length } = CheckdigitOidFactory.GetHashidOidOptions(scopename);
     return new Hashids(salt, length, this.ALPHABET);
   }

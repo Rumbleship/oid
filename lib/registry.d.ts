@@ -34,4 +34,5 @@ export declare const Registry: Readonly<{
     ApiKey: import("./implementations/scope-registry").Scope;
     PlaidIdentity: import("./implementations/scope-registry").Scope;
     PlaidIdentityEntry: import("./implementations/scope-registry").Scope;
+    Order: import("./implementations/scope-registry").Scope;
 }>;

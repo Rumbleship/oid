@@ -6,8 +6,8 @@ export declare class Scope {
     type: ScopeTypes;
     constructor(key: string | number, name: string, type: ScopeTypes);
 }
-declare class ScopeRegistry {
-    private readonly hashIdRegEx;
+export declare class ScopeRegistry {
+    readonly hashIdRegEx: RegExp;
     private registeredByKey;
     private registeredByScopename;
     private scopeKeyToFactoryMap;
@@ -21,4 +21,3 @@ declare class ScopeRegistry {
     resetRegistery(): void;
 }
 export declare const scopeRegistry: ScopeRegistry;
-export {};

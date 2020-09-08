@@ -53,5 +53,6 @@ export const Registry = Object.freeze({
   [CheckdigitScopes.PlaidIdentityEntry]: Oid.RegisterScope(
     CheckdigitScopes.PlaidIdentityEntry,
     'pidentry'
-  )
+  ),
+  [CheckdigitScopes.Order]: Oid.RegisterScope(CheckdigitScopes.Order, 'o')
 });
