@@ -54,5 +54,12 @@ export const Registry = Object.freeze({
     CheckdigitScopes.PlaidIdentityEntry,
     'pidentry'
   ),
-  [CheckdigitScopes.Order]: Oid.RegisterScope(CheckdigitScopes.Order, 'o')
+  [CheckdigitScopes.Order]: Oid.RegisterScope(CheckdigitScopes.Order, 'o'),
+  [CheckdigitScopes.QueuedSubscriptionManagement]: Oid.RegisterScope(
+    CheckdigitScopes.QueuedSubscriptionManagement,
+    'qsr'
+  ),
+  [CheckdigitScopes.Webhook]: Oid.RegisterScope(CheckdigitScopes.Webhook, 'wh'),
+  [CheckdigitScopes.QsrService]: Oid.RegisterScope(CheckdigitScopes.QsrService, 'qsrsrvc'),
+  [CheckdigitScopes.QsrCache]: Oid.RegisterScope(CheckdigitScopes.QsrCache, 'QsrCache')
 });

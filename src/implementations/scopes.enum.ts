@@ -34,5 +34,10 @@ export enum CheckdigitScopes {
   PlaidWebhook = 'PlaidWebhook',
   PlaidTransaction = 'PlaidTransaction',
   // Orders
-  Order = 'Order'
+  Order = 'Order',
+  // QueuedSubscriptionManagement (Qsr)
+  QueuedSubscriptionManagement = 'QueuedSubscriptionManagement',
+  Webhook = 'Webhook',
+  QsrService = 'QsrService',
+  QsrCache = 'QsrCache'
 }
