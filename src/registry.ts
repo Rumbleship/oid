@@ -55,8 +55,8 @@ export const Registry = Object.freeze({
     'pidentry'
   ),
   [CheckdigitScopes.Order]: Oid.RegisterScope(CheckdigitScopes.Order, 'o'),
-  [CheckdigitScopes.QueuedSubscriptionManagement]: Oid.RegisterScope(
-    CheckdigitScopes.QueuedSubscriptionManagement,
+  [CheckdigitScopes.QueuedSubscriptionRequest]: Oid.RegisterScope(
+    CheckdigitScopes.QueuedSubscriptionRequest,
     'qsr'
   ),
   [CheckdigitScopes.Webhook]: Oid.RegisterScope(CheckdigitScopes.Webhook, 'wh'),

@@ -35,7 +35,7 @@ export declare const Registry: Readonly<{
     [CheckdigitScopes.PlaidIdentity]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.PlaidIdentityEntry]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.Order]: import("./implementations/scope-registry").Scope;
-    [CheckdigitScopes.QueuedSubscriptionManagement]: import("./implementations/scope-registry").Scope;
+    [CheckdigitScopes.QueuedSubscriptionRequest]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.Webhook]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.QsrService]: import("./implementations/scope-registry").Scope;
     [CheckdigitScopes.QsrCache]: import("./implementations/scope-registry").Scope;

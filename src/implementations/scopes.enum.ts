@@ -36,7 +36,7 @@ export enum CheckdigitScopes {
   // Orders
   Order = 'Order',
   // QueuedSubscriptionManagement (Qsr)
-  QueuedSubscriptionManagement = 'QueuedSubscriptionManagement',
+  QueuedSubscriptionRequest = 'QueuedSubscriptionRequest',
   Webhook = 'Webhook',
   QsrService = 'QsrService',
   QsrCache = 'QsrCache'

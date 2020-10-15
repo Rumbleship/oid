@@ -29,7 +29,7 @@ export declare enum CheckdigitScopes {
     PlaidWebhook = "PlaidWebhook",
     PlaidTransaction = "PlaidTransaction",
     Order = "Order",
-    QueuedSubscriptionManagement = "QueuedSubscriptionManagement",
+    QueuedSubscriptionRequest = "QueuedSubscriptionRequest",
     Webhook = "Webhook",
     QsrService = "QsrService",
     QsrCache = "QsrCache"
