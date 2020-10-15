@@ -35,6 +35,11 @@ export enum CheckdigitScopes {
   PlaidTransaction = 'PlaidTransaction',
   // Orders
   Order = 'Order',
+  Contract = 'Contract',
+  LineItem = 'LineItem',
+  LineItemEvent = 'LineItemEvent',
+  OrderEvent = 'OrderEvent',
+  Term = 'Term',
   // QueuedSubscriptionManagement (Qsr)
   QueuedSubscriptionRequest = 'QueuedSubscriptionRequest',
   Webhook = 'Webhook',

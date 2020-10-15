@@ -55,6 +55,11 @@ export const Registry = Object.freeze({
     'pidentry'
   ),
   [CheckdigitScopes.Order]: Oid.RegisterScope(CheckdigitScopes.Order, 'o'),
+  [CheckdigitScopes.Contract]: Oid.RegisterScope(CheckdigitScopes.Contract, 'con'),
+  [CheckdigitScopes.LineItem]: Oid.RegisterScope(CheckdigitScopes.LineItem, 'li'),
+  [CheckdigitScopes.LineItemEvent]: Oid.RegisterScope(CheckdigitScopes.LineItemEvent, 'lie'),
+  [CheckdigitScopes.OrderEvent]: Oid.RegisterScope(CheckdigitScopes.OrderEvent, 'oe'),
+  [CheckdigitScopes.Term]: Oid.RegisterScope(CheckdigitScopes.Term, 'term'),
   [CheckdigitScopes.QueuedSubscriptionRequest]: Oid.RegisterScope(
     CheckdigitScopes.QueuedSubscriptionRequest,
     'qsr'

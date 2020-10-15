@@ -8,8 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [UNRELEASED]
 
 ### Added
+  * `Contract`; shortcode:  `con`
+  * `LineItem`; shortcode:  `li`
+  * `LineItemEvent`; shortcode:  `lie`
+  * `OrderEvent`; shortcode:  `oe`
+  * `Term`; shortcode:  `term`
   * `QueuedSubscriptionRequest`; shortcode: `qsr`
-  * `Webhook
+  * `Webhook`; shorcode: `wh`,
+  * `QsrService`; shortcode: `qsrsrvc`
+  * `QsrCache`; shortcode `QsrCache` (shortcode is capitalized to indicate it is a special purpose Oid for managing local caches)
 ### Removed
 ### Changed
 ### Fixed
