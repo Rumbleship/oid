@@ -40,6 +40,10 @@ export enum CheckdigitScopes {
   LineItemEvent = 'LineItemEvent',
   OrderEvent = 'OrderEvent',
   Term = 'Term',
+  // Accruals
+  Accrual = 'Accrual',
+  AccrualEvent = 'AccrualEvent',
+  JournalEntry = 'JournalEntry',
   // QueuedSubscriptionManagement (Qsr)
   QueuedSubscriptionRequest = 'QueuedSubscriptionRequest',
   Webhook = 'Webhook',

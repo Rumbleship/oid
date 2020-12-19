@@ -44,4 +44,7 @@ export declare const Registry: Readonly<{
     Webhook: import("./implementations/scope-registry").Scope;
     QsrService: import("./implementations/scope-registry").Scope;
     QsrCache: import("./implementations/scope-registry").Scope;
+    Accrual: import("./implementations/scope-registry").Scope;
+    AccrualEvent: import("./implementations/scope-registry").Scope;
+    JournalEntry: import("./implementations/scope-registry").Scope;
 }>;

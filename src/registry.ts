@@ -66,5 +66,8 @@ export const Registry = Object.freeze({
   ),
   [CheckdigitScopes.Webhook]: Oid.RegisterScope(CheckdigitScopes.Webhook, 'wh'),
   [CheckdigitScopes.QsrService]: Oid.RegisterScope(CheckdigitScopes.QsrService, 'qsrsrvc'),
-  [CheckdigitScopes.QsrCache]: Oid.RegisterScope(CheckdigitScopes.QsrCache, 'QsrCache')
+  [CheckdigitScopes.QsrCache]: Oid.RegisterScope(CheckdigitScopes.QsrCache, 'QsrCache'),
+  [CheckdigitScopes.Accrual]: Oid.RegisterScope(CheckdigitScopes.Accrual, 'acrl'),
+  [CheckdigitScopes.AccrualEvent]: Oid.RegisterScope(CheckdigitScopes.AccrualEvent, 'ace'),
+  [CheckdigitScopes.JournalEntry]: Oid.RegisterScope(CheckdigitScopes.JournalEntry, 'je')
 });
