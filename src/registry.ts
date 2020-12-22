@@ -18,6 +18,7 @@ export const Registry = Object.freeze({
     CheckdigitScopes.DivisionRelationship,
     'bsr'
   ),
+  [CheckdigitScopes.DivisionUser]: Oid.RegisterScope(CheckdigitScopes.DivisionUser, 'du'),
   [CheckdigitScopes.TermsChoice]: Oid.RegisterScope(CheckdigitScopes.TermsChoice, 'tc'),
   [CheckdigitScopes.ShopifyCredential]: Oid.RegisterScope(
     CheckdigitScopes.ShopifyCredential,

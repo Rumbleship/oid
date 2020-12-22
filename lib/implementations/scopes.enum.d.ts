@@ -7,6 +7,7 @@ export declare enum CheckdigitScopes {
     BalanceCheck = "BalanceCheck",
     Supplier = "Supplier",
     DivisionRelationship = "DivisionRelationship",
+    DivisionUser = "DivisionUser",
     TermsChoice = "TermsChoice",
     ShopifyCredential = "ShopifyCredential",
     WoocommerceCredential = "WoocommerceCredential",
