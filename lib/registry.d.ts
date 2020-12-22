@@ -13,6 +13,7 @@ export declare const Registry: Readonly<{
     Supplier: import("./implementations/scope-registry").Scope;
     User: import("./implementations/scope-registry").Scope;
     DivisionRelationship: import("./implementations/scope-registry").Scope;
+    DivisionUser: import("./implementations/scope-registry").Scope;
     TermsChoice: import("./implementations/scope-registry").Scope;
     ShopifyCredential: import("./implementations/scope-registry").Scope;
     WoocommerceCredential: import("./implementations/scope-registry").Scope;
