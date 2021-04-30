@@ -6,7 +6,7 @@
   ],
   "main": "lib/index.js",
   "description": "Global registry of Rumbleship OIDs",
-  "license": "UNLICENSED",
+  "license": "mit",
   "private": true,
   "engines": {
     "node": "10.x || 12.x"

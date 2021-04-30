@@ -1,5 +1,5 @@
 # Rumbleship Oids
-
+Oid library provided for example/use with [Rumbleship GQL Framework](https://github.com/rumbleship/rfi-gql-framework/). NB that oids packaged in the contained Registry are directly related to Rumbleship's business operations. You should provide your own.
 ## Why Oid
 We use oids for several reasons: 
 1. Exposing identifiers that are clearly prefixed with what they identify is immensely helpful for us as developers.
